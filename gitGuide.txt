@@ -1,0 +1,17 @@
+
+Set up your local directory
+
+Set up Git on your machine if you haven't already.
+
+mkdir /path/to/your/projectcd /path/to/your/projectgit initgit remote add origin https://Yermouth@bitbucket.org/1155049075/trygit.git
+
+Create your first file, commit, and push
+
+echo "Lai Sunny" >> contributors.txtgit add contributors.txtgit commit -m 'Initial commit with contributors'git push -u origin master
+
+Great job, now you're all set up! Get started coding or create a team and invite people to work with you.
+I have an existing project
+
+Already have a Git repository on your computer? Let's push it up to Bitbucket.
+
+cd /path/to/my/repogit remote add origin https://Yermouth@bitbucket.org/1155049075/trygit.gitgit push -u origin --all # pushes up the repo and its refs for the first timegit push -u origin --tags # pushes up any tags
