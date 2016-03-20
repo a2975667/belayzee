@@ -3,7 +3,7 @@
 Please start mongoDB service before starting the node server
 node server start command: npm start
 
-#Remember to copy mongod.exe to the place where you want to store the data
+Remember to copy mongod.exe to the place where you want to store the data
 i.e
 mkdir mongodb 
 cd mongodb
