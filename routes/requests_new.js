@@ -6,7 +6,7 @@ var Requests = require('../models/request');
 
 var requestRouter = express.Router();
 requestRouter.use(bodyParser.json());
-
+/*
 requestRouter.route('/')
 .get(function (req, res, next) {
     Requests.find({}, function (err, request) {
@@ -33,7 +33,7 @@ requestRouter.route('/')
         if (err) throw err;
         res.json(resp);
     });
-});
+});*/
 
 requestRouter.route('/:requestId')
 .get(function (req, res, next) {
