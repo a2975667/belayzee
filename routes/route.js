@@ -1,6 +1,8 @@
 /**
  * Created by tcheng on 3/21/16.
  */
+
+
 var User = require('../models/user');
 
 module.exports = {
@@ -23,11 +25,18 @@ module.exports = {
             });
         });
 
-        app.get('/request', isLoggedIn, function(req, res) {
-            res.render('form', {
+        app.get('/form_request', isLoggedIn, function(req, res) {
+            res.render('form_request.ejs', {
                 user: req.user
             });
         });
+
+        app.get('/form_volunteer', isLoggedIn, function(req, res) {
+            res.render('form_volunteer.ejs', {
+                user: req.user
+            });
+        });
+
 
         //login--get//
         app.get('/login', function(req, res) {

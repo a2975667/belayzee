@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-//var requests_new = require('./routes/requests_new');
+var requests_new = require('./routes/requests_new');
 var flash = require('connect-flash');
 var morgan = require('morgan');
 var session = require('express-session');
@@ -59,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', users);
 //app.use('/requests', requests);
-//app.use('/requests', requests_new);
+app.use('/requests', requests_new);
 require('./routes/route.js').authenticate(app, passport); // load our routes and pass in our app and fully configured passport
 //app.use('/', routes);
 
