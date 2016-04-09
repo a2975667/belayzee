@@ -37,7 +37,15 @@ var userSchema = mongoose.Schema({
         tokens: {
             type: Number,
             default: 0
-        }
+        },
+        requests: [{
+          id: String,
+          title: String
+        }],
+        replies:[{
+          id: String,
+          title: String
+        }]
     }
 
 });

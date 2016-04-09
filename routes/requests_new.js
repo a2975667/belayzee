@@ -6,49 +6,38 @@ var Requests = require('../models/request');
 
 var requestRouter = express.Router();
 requestRouter.use(bodyParser.json());
-
+/*
 requestRouter.route('/')
 .get(function (req, res, next) {
-    Requests.find({
-        "request_list": req.request
-    }, function (err, request) {
+    Requests.find({}, function (err, request) {
         if (err) throw err;
-        console.log("====="); 
-        console.log(request);  
-        res.render('request.ejs', {
-            user: req.user,
-            request: req.request
-        });
+        res.json(request);
     });
 })
 
 .post(function (req, res, next) {
-    Requests.create(
-        req.body
-    , function (err, request) {
+    Requests.create(req.body, function (err, request) {
         if (err) throw err;
         console.log('request created!');
         var id = request._id;
-        req.res.redirect('/requests');
-    });
 
+        res.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+        res.end('Added the request with id: ' + id);
+    });
 })
 
 .delete(function (req, res, next) {
-    Requests.remove({
-
-    }, function (err, resp) {
-        console.log('request all deleted!');
+    Requests.remove({}, function (err, resp) {
         if (err) throw err;
-        req.res.redirect('/requests');
+        res.json(resp);
     });
-});
+});*/
 
 requestRouter.route('/:requestId')
 .get(function (req, res, next) {
-    Requests.findById(
-        req.params.requestId
-    , function (err, request) {
+    Requests.findById(req.params.requestId, function (err, request) {
         if (err) throw err;
         res.json(request);
     });

@@ -15,15 +15,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><span>BeLayzee</span></a>
+          <a class="navbar-brand" href="/"><span>BeLayzee</span></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active">
-              <a href="#">Welcome Alex!</a>
+            <li>
+                <%if (status == "Login") { %>
+
+                    <a href="/profile"><%= user.profile.displayName %>'s Profile</a>
+                    <% } else {%>
+                    <a href="/signup"> Sign Up</a>
+                    <% }%>
             </li>
             <li>
-              <a href="#">Logout</a>
+                <%if (status == "Login") { %>
+                    <a href="/logout">Logout</a>
+                    <% } else {%>
+                    <a href="/login">Login</a>
+                    <% }%>
             </li>
           </ul>
         </div>
@@ -36,13 +45,14 @@
             <img src="https://unsplash.imgix.net/photo-1420708392410-3c593b80d416?w=1024&amp;q=50&amp;fm=jpg&amp;s=db450320d7ee6de66c24c9b0bf2de3c6" class="center-block img-responsive">
           </div>
           <div class="col-md-6">
-            <h1>Request</h1>
-            <h3>Walk home with me</h3>
-            <span class="badge" style="background: gray">5 tokens</span>
-            <span class="badge" style="background: purple">30 minutes</span>
-            <span class="badge" style="background: blue">10 replies</span>
+            <h1><%= request.userName %>'s Request</h1>
+            <h3><%= request.requestName %></h3>
+            <span class="badge" style="background: gray"><%= request.Token %> token</span>
+            <span class="badge" style="background: purple"><%= request.completeTime %></span>
+            <span class="badge" style="background: blue"><%= request.Replies.length %> Reply</span>
+            <span class="badge" style="background: green"><%= request.Catagory %></span>
             <p>
-              <br>I want someone to walk home with me if you are heading toward Central.
+              <br><%= request.description %>
               <br>
               <br>
             </p>
@@ -123,6 +133,6 @@
         </div>
       </div>
     </footer>
-  
+
 
 </body></html>

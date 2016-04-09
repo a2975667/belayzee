@@ -59,7 +59,7 @@
                     <br>
                     <br>
                     <br>
-                    <form action="/request" class="form-horizontal" role="form">
+                    <form action="/request" method="POST" class="form-horizontal" role="form" id="requestForm">
                         <div class="form-group">
                             <div class="col-sm-2">
                                 <label>Title*</label>
@@ -89,16 +89,18 @@
                                 <label>Expire Time</label>
                             </div>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="expiretime" placeholder="putin 2.5 for 2 hour and 5 minutes">
+                                <input type="text" class="form-control" id="expiretime" placeholder="put in 2.5 for 2 hour and 5 minutes">
                             </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2 text-right">
+                                <button type="submit" value="submit" class="btn btn-default">Submit</buton>
                             </div>
+                        </div>
                     </form>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-10 col-sm-offset-2 text-right">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -161,7 +163,7 @@
             </div>
         </div>
     </footer>
-
+<script src="javascript/index.js"></script>
 
 </body>
 

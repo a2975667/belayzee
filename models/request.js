@@ -19,11 +19,11 @@ var replySchema = new Schema({
         type: Number,
         min: 1,
         max: 9999,
-        required: true
+
     },
     comment: {
         type: String,
-        required: true
+
     }
 }, {
     timestamps: true
@@ -31,45 +31,47 @@ var replySchema = new Schema({
 
 // create a schema
 var requestSchema = new Schema({
-            requestID: {
-                type: String,
-                required: true
-            },
-            userID: {
-                type: String,
-                required: true
-            },
-            userName: {
-                type: String,
-                required: true
-            },
-            Token: {
-                type: Number,
-                min: 1,
-                max: 9999,
-                required: true
-            },
-            description: {
-                type: String,
-                required: true
-            },
-            completeTime: {
-                type: String,
-                required: true
-            },
-            Catagory: {
-                type: String
-            },
-            Replies:
-                [replySchema]
-            },
-            {
-                timestamps: true
-            });
+    requestName: {
+        type: String,
+        required: true
+    },
+    userID: {
+        type: String,
+        required: true
+    },
+    userName: {
+        type: String,
+        required: true
+    },
+    Token: {
+        type: Number,
+        min: 1,
+        max: 9999,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    completeTime: {
+        type: String,
+        //required: true
+    },
+    Catagory: {
+        type: String
+    },
+    Replies: [{
+      userid: String,
+      username: String,
+    }]
 
-        // the schema is useless so far
-        // we need to create a model using it
-        var Requests = mongoose.model('Request', requestSchema);
+}, {
+    timestamps: true
+});
 
-        // make this available to our Node applications
-        module.exports = Requests;
+// the schema is useless so far
+// we need to create a model using it
+var Requests = mongoose.model('Request', requestSchema);
+
+// make this available to our Node applications
+module.exports = Requests;
