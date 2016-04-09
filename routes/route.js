@@ -109,7 +109,7 @@ module.exports = {
                     if (err) throw err;
                     var tmp = request.Replies;
                     request.Replies = tmp.filter(function(e) {
-                        return e.userid !== req.user._id+'';
+                        return e.userid !== req.user._id + '';
                     });
                     console.log(request.Replies);
                     request.save(function(err, request) {
@@ -129,6 +129,52 @@ module.exports = {
                         if (err) throw err;
                         console.log("updated user");
                     });
+                });
+        });
+
+        app.post('/deleteRequest', isLoggedIn, function(req, res) {
+            var userwith = [];
+            Requests.findById(
+                req.body.requestId,
+                function(err, request) {
+                    if (err) throw err;
+                    for (var m = 0; m < request.Replies.length; m++) {
+                        userwith.push(request.Replies[m].userid);
+                    }
+                    var owner = request.userID;
+                    User.findById(owner,
+                        function(err, user) {
+                            if (err) throw err;
+                            //console.log(user.profile.replies);
+                            var tmp = user.profile.requests;
+                            user.profile.requests = tmp.filter(function(e) {
+                                console.log(e.id);
+                                console.log(req.body.requestId);
+                                return e.id !== req.body.requestId;
+                            });
+                            user.save(function(err, user) {
+                                if (err) throw err;
+                                console.log("updated owner");
+                            });
+                        });
+                    for (var m = 0; m < userwith.length; m++) {
+                        User.findById(userwith[m],
+                            function(err, user) {
+                                if (err) throw err;
+                                var tmp = user.profile.replies;
+                                user.profile.replies = tmp.filter(function(e) {
+                                    return e.id !== req.body.requestId;
+                                });
+                                user.save(function(err, user) {
+                                    if (err) throw err;
+                                    console.log("updated user");
+                                });
+                            });
+                    }
+                    Requests.findByIdAndRemove(req.body.requestId, function (err, resp) {        if (err) throw err;
+                        console.log("deleted request");
+                    });
+
                 });
         });
 
@@ -178,8 +224,10 @@ module.exports = {
         });
 
         app.get('/requests', function(req, res, next) {
+            //var request={};
             Requests.find({}, function(err, request) {
-                console.log("/requests/" + request[0]._id);
+
+                //console.log("/requests/" + request[0]._id);
                 if (err) throw err;
                 var user;
                 var status;
