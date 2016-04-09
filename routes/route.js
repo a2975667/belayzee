@@ -40,7 +40,7 @@ module.exports = {
                             Token: req.body.token,
                             description: req.body.description,
                             completeTime: "11:50",
-                            Catagory: "Banana"
+                            Catagory: req.body.category
                         },
                         function(err, request, next) {
                             if (err) throw err;
@@ -137,6 +137,8 @@ module.exports = {
             Requests.findById(
                 req.body.requestId,
                 function(err, request) {
+                    console.log(request);
+                    var token = request.Token;
                     if (err) throw err;
                     for (var m = 0; m < request.Replies.length; m++) {
                         userwith.push(request.Replies[m].userid);
@@ -152,6 +154,14 @@ module.exports = {
                                 console.log(req.body.requestId);
                                 return e.id !== req.body.requestId;
                             });
+                            var current = user.profile.tokens;
+                            console.log(current)
+                            console.log(token);
+                            console.log(parseInt(current) + parseInt(token))
+                            user.profile.tokens = parseInt(current) + parseInt(token);
+                            console.log("*******");
+                            console.log(user);
+                            console.log("*******");
                             user.save(function(err, user) {
                                 if (err) throw err;
                                 console.log("updated owner");
@@ -171,7 +181,8 @@ module.exports = {
                                 });
                             });
                     }
-                    Requests.findByIdAndRemove(req.body.requestId, function (err, resp) {        if (err) throw err;
+                    Requests.findByIdAndRemove(req.body.requestId, function(err, resp) {
+                        if (err) throw err;
                         console.log("deleted request");
                     });
 
@@ -206,13 +217,127 @@ module.exports = {
                         user = req.user;
                         status = "Logout";
                     }
-
                     res.render(renderfile, {
                         request: request,
                         user: user,
                         status: status,
                         replyStat: replyStat
                     });
+                });
+        });
+
+        app.get('/update/request/:updaterequestId', isLoggedIn, function(req, res) {
+            console.log(req.params.updaterequestId);
+            Requests.findById(
+                req.params.updaterequestId,
+                function(err, request) {
+                    console.log(request);
+                    if (err) throw err;
+                    var user = req.user;
+                    var status = "Login";
+                    var renderfile = 'updateform.ejs';
+                    console.log(req.user._id);
+                    console.log(request.userID);
+                    if ((req.user._id + '') !== (request.userID + '')) {
+                        renderfile = "error.ejs";
+                        console.log('error!');
+                    }
+                    res.render(renderfile, {
+                        request: request,
+                        user: user,
+                        status: status
+                    });
+                });
+
+        });
+
+        app.post('/update/request/:updaterequestId', isLoggedIn, function(req, res) {
+            var userwith = [];
+            Requests.findById(
+                req.params.updaterequestId,
+                function(err, request) {
+                    console.log(request);
+                    var token = request.Token;
+                    if (err) throw err;
+                    for (var m = 0; m < request.Replies.length; m++) {
+                        userwith.push(request.Replies[m].userid);
+                    }
+                    var owner = request.userID;
+                    User.findById(owner,
+                        function(err, user) {
+                            if (err) throw err;
+                            console.log(user);
+                            var tmp = user.profile.requests;
+                            user.profile.requests = tmp.filter(function(e) {
+                                console.log(e.id);
+                                console.log(req.params.updaterequestId);
+                                return e.id !== req.params.updaterequestId;
+                            });
+                            var current = user.profile.tokens;
+                            user.profile.tokens = parseInt(current) + parseInt(token);
+                            user.save(function(err, user) {
+                                if (err) throw err;
+                                console.log("updated owner");
+                            });
+                            Requests.findByIdAndUpdate(req.params.updaterequestId, {
+                                requestName: req.body.title,
+                                Token: req.body.token,
+                                Catagory: req.body.category,
+                                completeTime: req.body.expiretime,
+                                description: req.body.description
+                            }, {
+                                new: true
+                            }, function(err, request) {
+                                if (err) throw err;
+                                User.findById(owner,
+                                    function(err, user) {
+                                        if (err) throw err;
+                                        user.profile.requests.push({
+                                            id: req.params.updaterequestId,
+                                            title: req.body.title
+                                        });
+
+                                        var current = user.profile.tokens;
+                                        user.profile.tokens = parseInt(current) - parseInt(req.body.token);
+                                        user.save(function(err, user) {
+                                            if (err) throw err;
+                                            console.log("updated owner");
+                                        });
+
+                                        for (var m = 0; m < userwith.length; m++) {
+                                            User.findById(userwith[m],
+                                                function(err, user) {
+                                                    if (err) throw err;
+                                                    var tmp = user.profile.replies;
+                                                    user.profile.replies = tmp.filter(function(e) {
+                                                        return e.id !== req.params.updaterequestId;
+                                                    });
+                                                    user.save(function(err, user) {
+                                                        if (err) throw err;
+                                                        console.log("updated user");
+                                                    });
+                                                });
+                                        }
+
+                                        for (var m = 0; m < userwith.length; m++) {
+                                            User.findById(userwith[m],
+                                                function(err, user) {
+                                                    if (err) throw err;
+                                                    user.profile.replies.push({
+                                                        id: req.params.updaterequestId,
+                                                        title: req.body.title
+                                                    });
+
+                                                    user.save(function(err, user) {
+                                                        if (err) throw err;
+                                                        console.log("updated user");
+                                                    });
+                                                });
+                                        }
+                                    });
+                            });
+                        });
+
                 });
         });
 

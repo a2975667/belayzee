@@ -14,8 +14,9 @@ $("#requestForm").submit(function(e){
           data[name] = value;
       });
 
+
       $.ajax({
-          url: url,
+          url: "/update/request/"+ getRequestId(),
           type: type,
           data: data,
           success: function(data){
@@ -26,3 +27,7 @@ $("#requestForm").submit(function(e){
       window.location = "/requests";
 return false;
 });
+
+function getRequestId() {
+    return window.location.href.split('/')[window.location.href.split('/').length-1] ;
+}

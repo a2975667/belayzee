@@ -23,24 +23,31 @@ $(document).ready(function() {
         });
         window.location = "/requests"
       }
+    }
+  });
 
-      /*var data = {};
-      data["requestId"] = getRequestId();
-      data["name"] = $("#rname").text();
-      //var requestId = getRequestId();
-      $.ajax({
-          type: "POST",
-          url: "/reply",
-          data: data,
-          error: function(xhr) {
-              $("#message").text(xhr.statusText);
-              console.log(xhr.statusText);
-          },
-          success: function(result) {
-            console.log("ok");
-          }
-      });
-      window.location = "/"*/
+  $("#updateform").click(function() {
+    if ($("#status").text()=="Login"){
+      window.location = "/login";
+    }else{
+      window.location = "/update/request/"+ getRequestId();
+        /*console.log("update");
+        var data = {};
+        data["requestId"] = getRequestId();
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: "/update/request",
+            data: data,
+            error: function(xhr) {
+                $("#message").text(xhr.statusText);
+                console.log(xhr.statusText);
+            },
+            success: function(result) {
+              console.log("ok");
+              console.log(result.requestId)
+            }
+        });*/
     }
   });
 
