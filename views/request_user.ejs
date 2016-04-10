@@ -72,29 +72,18 @@
                                     </div>
                                     <div class="panel-body">
                                         <ul class="list-group">
-                                            <li class="list-group-item">Bob
-                                                <span class="badge" style="background: red">19<i class="fa fa-star fa-fw"></i></span>
-                                            </li>
-                                            <li class="list-group-item">Carrik
-                                                <span class="badge" style="background: gray">3<i class="fa fa-star fa-fw"></i></span>
-                                            </li>
-                                            <li class="list-group-item">Daniel
-                                                <span class="badge" style="background: gray">5<i class="fa fa-star fa-fw"></i></span>
-                                            </li>
-                                            <li class="list-group-item">Mark
-                                                <span class="badge" style="background: gray">5<i class="fa fa-star fa-fw"></i></span>
-                                            </li>
-                                            <li class="list-group-item">Nick
-                                                <span class="badge" style="background: orange">7</span>
-                                            </li>
-                                        </ul>
-                                        <ul class="pager">
-                                            <li>
-                                                <a href="#">←  Prev</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Next  →</a>
-                                            </li>
+
+                                          <% if(request.Replies == 0){%>
+                                              <h3 style="color: grey">No replies yet!</h3>
+                                              <br>
+                                              <% } %>
+                                                  <% for( var i=0;i<request.Replies.length;i++) { %>
+
+                                                      <li class="list-group-item replieUser" value='<%= request.Replies[i].userid %>' value2='<%= request.Replies[i].username%>'>
+                                                          <%= request.Replies[i].username %>
+                                                          <span class="badge" style="background: red">19<i class="fa fa-star fa-fw"></i></span>
+                                                      </li>
+                                                      <% } %>
                                         </ul>
                                     </div>
                                 </div>

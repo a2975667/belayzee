@@ -63,6 +63,10 @@ var requestSchema = new Schema({
     Replies: [{
       userid: String,
       username: String,
+      status: {
+        type: String,
+        default: "pending"
+      }
     }]
 
 }, {

@@ -400,8 +400,10 @@ module.exports = {
                 "local.email": req.user.local.email
             }, function(err, docs) {
                 //console.log("====")
-                //console.log(docs);
-                res.render('user.ejs', {
+                console.log(req.user);
+                console.log(req.user.profile.replies);
+                console.log(req.user.profile.requests);
+                res.render('user_1.ejs', {
                     user: req.user
                 });
             });

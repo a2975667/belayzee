@@ -1,4 +1,36 @@
 $(document).ready(function() {
+  $(".replieUser").click(function() {
+    if ($("#status").text()=="Login"){
+      window.location = "/login";
+    }else{
+      var uid =  $(this).attr("value");
+      var uname = $(this).attr("value2");
+      var msg = "select " + uname + " ?";
+      console.log();
+      if(confirm(msg)){
+        /*
+        var data = {};
+        data["requestId"] = getRequestId();
+        //data["name"] = $("#rname").text();
+        //var requestId = getRequestId();
+        $.ajax({
+            type: "POST",
+            url: "/deleteRequest",
+            data: data,
+            error: function(xhr) {
+                $("#message").text(xhr.statusText);
+                console.log(xhr.statusText);
+            },
+            success: function(result) {
+              console.log("ok");
+            }
+        });
+        window.location = "/requests"*/
+      }
+    }
+  });
+
+
   $("#delete").click(function() {
     if ($("#status").text()=="Login"){
       window.location = "/login";

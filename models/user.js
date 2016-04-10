@@ -44,7 +44,11 @@ var userSchema = mongoose.Schema({
         }],
         replies:[{
           id: String,
-          title: String
+          title: String,
+          status: {
+            type: String,
+            default: "pending"
+          }
         }]
     }
 
