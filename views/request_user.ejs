@@ -63,6 +63,9 @@
                             <br>
                     </p>
                     <br>
+                    <% var active = false; for( var i=0;i<request.Replies.length;i++){ if(request.Replies[i].status == "active") { active=true; %>
+                        <%tmp = " ";%>
+                        <% } } %>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
@@ -90,8 +93,14 @@
                             </div>
                         </div>
                     </div>
+                    <% var active = false; for( var i=0;i<request.Replies.length;i++){ if(request.Replies[i].status == "active") { active=true; %>
+                        <button id = "done" value='<%= request.Replies[i].userid %>' class="btn btn-block btn-default" style="background: yellow"><%= request.Replies[i].username %> is assigned! </button>
+                        <% } } %>
+
                     <button id="updateform" class="btn btn-block btn-default" style="background: orange">Edit</button>
+
                     <button id="delete" class="btn btn-block btn-default" style="background: orange">Cancel Request</button>
+
                 </div>
             </div>
         </div>

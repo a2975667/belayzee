@@ -8,14 +8,13 @@ $(document).ready(function() {
       var msg = "select " + uname + " ?";
       console.log();
       if(confirm(msg)){
-        /*
         var data = {};
         data["requestId"] = getRequestId();
-        //data["name"] = $("#rname").text();
-        //var requestId = getRequestId();
+        data["userId"] = uid;
+        data["username"] = uname;
         $.ajax({
             type: "POST",
-            url: "/deleteRequest",
+            url: "/confirmtask",
             data: data,
             error: function(xhr) {
                 $("#message").text(xhr.statusText);
@@ -25,11 +24,37 @@ $(document).ready(function() {
               console.log("ok");
             }
         });
-        window.location = "/requests"*/
+        window.location = "/requests/"+getRequestId();
       }
     }
   });
 
+  $("#done").click(function() {
+    var uid =  $(this).attr("value");
+    if ($("#status").text()=="Login"){
+      window.location = "/login";
+    }else{
+      if(confirm('Request Complete?')){
+        console.log("delete");
+        var data = {};
+        data["requestId"] = getRequestId();
+        data["userId"] = uid;
+        $.ajax({
+            type: "POST",
+            url: "/completeRequest",
+            data: data,
+            error: function(xhr) {
+                $("#message").text(xhr.statusText);
+                console.log(xhr.statusText);
+            },
+            success: function(result) {
+              console.log("ok");
+            }
+        });
+        window.location = "/requests"
+      }
+    }
+  });
 
   $("#delete").click(function() {
     if ($("#status").text()=="Login"){
@@ -63,23 +88,6 @@ $(document).ready(function() {
       window.location = "/login";
     }else{
       window.location = "/update/request/"+ getRequestId();
-        /*console.log("update");
-        var data = {};
-        data["requestId"] = getRequestId();
-        console.log(data);
-        $.ajax({
-            type: "POST",
-            url: "/update/request",
-            data: data,
-            error: function(xhr) {
-                $("#message").text(xhr.statusText);
-                console.log(xhr.statusText);
-            },
-            success: function(result) {
-              console.log("ok");
-              console.log(result.requestId)
-            }
-        });*/
     }
   });
 

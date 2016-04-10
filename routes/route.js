@@ -189,6 +189,74 @@ module.exports = {
                 });
         });
 
+        app.post('/completeRequest', isLoggedIn, function(req, res) {
+            var userwith = [];
+            var completeUser = req.body.userId;
+            Requests.findById(
+                req.body.requestId,
+                function(err, request) {
+                    console.log(request);
+                    var token = request.Token;
+                    if (err) throw err;
+                    for (var m = 0; m < request.Replies.length; m++) {
+                        userwith.push(request.Replies[m].userid);
+                    }
+                    var owner = request.userID;
+                    User.findById(owner,
+                        function(err, user) {
+                            if (err) throw err;
+                            //console.log(user.profile.replies);
+                            var tmp = user.profile.requests;
+                            user.profile.requests = tmp.filter(function(e) {
+                                console.log(e.id);
+                                console.log(req.body.requestId);
+                                return e.id !== req.body.requestId;
+                            });
+                            var current = user.profile.tokens;
+                            user.save(function(err, user) {
+                                if (err) throw err;
+                                console.log("updated owner");
+                            });
+                        });
+                        User.findById(completeUser,
+                            function(err, user) {
+                                if (err) throw err;
+                                //console.log(user.profile.replies);
+                                var tmp = user.profile.requests;
+                                user.profile.requests = tmp.filter(function(e) {
+                                    console.log(e.id);
+                                    console.log(req.body.requestId);
+                                    return e.id !== req.body.requestId;
+                                });
+                                var current = user.profile.tokens;
+                                user.profile.tokens = parseInt(current) + parseInt(token);
+                                user.save(function(err, user) {
+                                    if (err) throw err;
+                                    console.log("updated owner");
+                                });
+                            });
+                    for (var m = 0; m < userwith.length; m++) {
+                        User.findById(userwith[m],
+                            function(err, user) {
+                                if (err) throw err;
+                                var tmp = user.profile.replies;
+                                user.profile.replies = tmp.filter(function(e) {
+                                    return e.id !== req.body.requestId;
+                                });
+                                user.save(function(err, user) {
+                                    if (err) throw err;
+                                    console.log("updated user");
+                                });
+                            });
+                    }
+                    Requests.findByIdAndRemove(req.body.requestId, function(err, resp) {
+                        if (err) throw err;
+                        console.log("deleted request");
+                    });
+
+                });
+        });
+
         app.get('/requests/:requestId', function(req, res) {
             Requests.findById(
                 req.params.requestId,
@@ -216,7 +284,14 @@ module.exports = {
                     } else {
                         user = req.user;
                         status = "Logout";
+                        //renderfile = "login.ejs"
                     }
+                    console.log({
+                        request: request,
+                        user: user,
+                        status: status,
+                        replyStat: replyStat
+                    });
                     res.render(renderfile, {
                         request: request,
                         user: user,
@@ -224,6 +299,70 @@ module.exports = {
                         replyStat: replyStat
                     });
                 });
+        });
+
+        app.post('/confirmtask', isLoggedIn, function(req,res){
+          console.log(req.body);
+          var oldActive;
+          Requests.findById(req.body.requestId, function(err,request){
+            if(err) throw err;
+            console.log(request);
+            for (var j = 0; j < request.Replies.length; j++){
+              if((request.Replies[j].userid+'') === (req.body.userId+'')){
+                request.Replies[j].status = "active";
+              }else{
+                if(request.Replies[j].status = "active"){oldActive = request.Replies[j].userid}
+                request.Replies[j].status = "pending";
+              }
+              console.log(request)
+              request.save(function(err,request){
+                if(err) throw err;
+                console.log("updated");
+              });
+            }
+            User.findById(req.body.userId, function(err, user){
+              if(err) throw err;
+              console.log(user);
+              for (var j=0; j< user.profile.replies.length; j++){
+                console.log((user.profile.replies[j].id+'') == (req.body.requestId+''));
+                console.log(req.body.requestId);
+                if((user.profile.replies[j].id+'') == (req.body.requestId+'')){
+                  console.log("changing");
+                  console.log(user.profile.replies[j].status);
+                  user.profile.replies[j].status = "active";
+                }
+                console.log(user);
+                user.save(function(err, user) {
+                    if (err) throw err;
+                    console.log("updated owner");
+                });
+
+              }
+            });
+
+            User.findById(oldActive, function(err, user){
+              if(err) throw err;
+              console.log(user);
+              for (var j=0; j< user.profile.replies.length; j++){
+                console.log((user.profile.replies[j].id+'') == (req.body.requestId+''));
+                console.log(req.body.requestId);
+                if((user.profile.replies[j].id+'') == (req.body.requestId+'')){
+                  console.log("changing");
+                  console.log(user.profile.replies[j].status);
+                  user.profile.replies[j].status = "pending";
+                }
+                console.log(user);
+                user.save(function(err, user) {
+                    if (err) throw err;
+                    console.log("updated owner");
+                });
+
+              }
+            });
+
+          });
+
+
         });
 
         app.get('/update/request/:updaterequestId', isLoggedIn, function(req, res) {
@@ -289,6 +428,13 @@ module.exports = {
                                 new: true
                             }, function(err, request) {
                                 if (err) throw err;
+                                var activeuser = undefined;
+                                for (var j = 0; j < request.Replies.length; j++){
+                                  if((request.Replies[j].status) === "active"){
+                                    activeuser = request.Replies[j].userid;
+                                  }
+                                }
+
                                 User.findById(owner,
                                     function(err, user) {
                                         if (err) throw err;
@@ -299,6 +445,7 @@ module.exports = {
 
                                         var current = user.profile.tokens;
                                         user.profile.tokens = parseInt(current) - parseInt(req.body.token);
+
                                         user.save(function(err, user) {
                                             if (err) throw err;
                                             console.log("updated owner");
@@ -323,9 +470,20 @@ module.exports = {
                                             User.findById(userwith[m],
                                                 function(err, user) {
                                                     if (err) throw err;
+                                                    status = "pending"
+                                                    console.log("-------==" + activeuser);
+                                                    console.log("-------==" + !!activeuser);
+                                                    console.log("-------==" + user._id);
+                                                    console.log("-------==" + user);
+                                                    if(!!activeuser){
+                                                      if ((user._id+'') == (activeuser+'')){
+                                                        status = "active";
+                                                      }
+                                                    }
                                                     user.profile.replies.push({
                                                         id: req.params.updaterequestId,
-                                                        title: req.body.title
+                                                        title: req.body.title,
+                                                        status: status
                                                     });
 
                                                     user.save(function(err, user) {
