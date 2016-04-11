@@ -1,185 +1,202 @@
-<html><head>
+<html>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/"><span>BeLayzee</span></a>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><span>BeLayzee</span></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="/profile">Welcome <%= user.profile.displayName %></a>
+                    </li>
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active">
-              <a href="/profile">Welcome <%= user.profile.displayName %></a>
-            </li>
-            <li>
-              <a href="/logout">Logout</a>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
     <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <img src="/img/profile_head.jpg" class="img-responsive">
-            <h1>@<%= user.profile.displayName %> &nbsp;</h1>
-              <span style="height:1.5em; background:blue" class="badge">100+ Follower</span>
-              <span class="badge" style="height:1.5em; background:Green">Cooking Expert</span>
-            </h2>
-          </div>
-        </div>
-
-        <div class="section">
-              <div class="container">
-                <div class="row" style="background: #E1E6FA; border-radius: 15px;">
-                  <div class="col-md-4 text-center">
-                    <div>
-                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
-                    <h3 style="display: inline-block;" class="text-center">signup on:</h3>
-                    <br>
-                    <h3> <%= user.createdAt.getFullYear() %> . <%= user.createdAt.getMonth()+1 %> . <%= user.createdAt.getDate() %></h3>
-                  </div>
-                    <hr style="border:0; height:1.5px; background-color:#A9A9A9;">
-                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
-                    <h3 style="display: inline-block;" class="text-center">Last update on:</h3>
-                    <br>
-                    <h3> <%= user.updatedAt.getFullYear() %> . <%= user.updatedAt.getMonth()+1 %> . <%= user.updatedAt.getDate() %></h3>
-                    <hr class="hidden-lg hidden-md" style="border:0; height:1.5px; background-color:#A9A9A9;">
-
-                  </div>
-                  <div class="col-md-4 text-center">
-                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
-                    <h3 style="display: inline-block;" class="text-center">Credit:</h3>
-                    <br>
-                    <h3><%= user.profile.tokens %> tokens remaining</h3>
-                    <hr style="border:0; height:1.5px; background-color:#A9A9A9;">
-                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
-                    <h3 style="display: inline-block;" class="text-center">Requests:</h3>
-                    <br>
-                    <h3> <%= user.profile.requests.length %> request made</h3>
-                    <hr class="hidden-lg hidden-md" style="border:0; height:1.5px; background-color:#A9A9A9;">
-                  </div>
-                  <div class="col-md-4 text-center">
-                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
-                    <h3 style="display: inline-block;" class="text-center">Replies:</h3>
-                    <br>
-                    <h3> <%= user.profile.replies.length %> replies made</h3>
-                    <hr style="border:0; height:1.5px; background-color:#A9A9A9;">
-                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
-                    <h3 style="display: inline-block;" class="text-center">Pending:</h3>
-                    <br><h3></h3>
-                    <hr class="hidden-lg hidden-md" style="border:0; height:1.5px; background-color:#A9A9A9;">
-                  </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="/img/profile_head.jpg" class="img-responsive">
+                    <h1>@<%= user.profile.displayName %> &nbsp;</h1>
+                    <span style="height:1.5em; background:blue" class="badge">100+ Follower</span>
+                    <span class="badge" style="height:1.5em; background:Green">Cooking Expert</span>
+                    </h2>
                 </div>
-              </div>
             </div>
 
-      </div>
+            <div class="section">
+                <div class="container">
+                    <div class="row" style="background: #E1E6FA; border-radius: 15px;">
+                        <div class="col-md-4 text-center">
+                            <div>
+                                <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
+                                <h3 style="display: inline-block;" class="text-center">signup on:</h3>
+                                <br>
+                                <h3> <%= user.createdAt.getFullYear() %> . <%= user.createdAt.getMonth()+1 %> . <%= user.createdAt.getDate() %></h3>
+                            </div>
+                            <hr style="border:0; height:1.5px; background-color:#A9A9A9;">
+                            <i class="fa fa-2x fa-cloud-upload fa-fw" style="display: inline-block; vertical-align:middle"></i>
+                            <h3 style="display: inline-block;" class="text-center">Last update on:</h3>
+                            <br>
+                            <h3> <%= user.updatedAt.getFullYear() %> . <%= user.updatedAt.getMonth()+1 %> . <%= user.updatedAt.getDate() %></h3>
+                            <hr class="hidden-lg hidden-md" style="border:0; height:1.5px; background-color:#A9A9A9;">
+
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="fa fa-2x fa-dollar" style="display: inline-block; vertical-align:middle"></i>
+                            <h3 style="display: inline-block;" class="text-center">Credit:</h3>
+                            <br>
+                            <h3><%= user.profile.tokens %> tokens remaining</h3>
+                            <hr style="border:0; height:1.5px; background-color:#A9A9A9;">
+                            <i class="fa fa-2x fa-hand-o-right fa-fw " style="display: inline-block; vertical-align:middle"></i>
+                            <h3 style="display: inline-block;" class="text-center">Requests:</h3>
+                            <br>
+                            <h3> <%= user.profile.requests.length %> request made</h3>
+                            <hr class="hidden-lg hidden-md" style="border:0; height:1.5px; background-color:#A9A9A9;">
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="fa fa-2x fa-mail-forward fa-fw" style="display: inline-block; vertical-align:middle"></i>
+                            <h3 style="display: inline-block;" class="text-center">Replies:</h3>
+                            <br>
+                            <h3> <%= user.profile.replies.length %> replies made</h3>
+                            <hr style="border:0; height:1.5px; background-color:#A9A9A9;">
+                            <i class="fa fa-2x fa-paper-plane-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
+                            <h3 style="display: inline-block;" class="text-center">Pending:</h3>
+                      <br>
+                      <h3>
+                        <% var x=0; %>
+                          <% for (var i=0; i<user.profile.replies.length; i++) { %>
+                            <% if (user.profile.replies[i].status == "pending") {%>
+                            <% x = x+1; %>
+                          <% } %>
+                        <% } %>
+                        <%= x %> request pending
+                    </h3>
+                            <hr class="hidden-lg hidden-md" style="border:0; height:1.5px; background-color:#A9A9A9;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
     <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1>Request</h1>
-            <ul class="list-group">
-              <% if(user.profile.requests.length == 0){%>
-                  <h3 style="color: grey">No requests yet!</h3>
-                  <br>
-                  <% } %>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Request</h1>
+                    <ul class="list-group">
+                        <% if(user.profile.requests.length == 0){%>
+                            <h3 style="color: grey">No requests yet!</h3>
+                            <br>
+                            <% } %>
 
-                  <% for( var i=0;i<user.profile.requests.length;i++) { %>
+                                <% for( var i=0;i<user.profile.requests.length;i++) { %>
 
-                      <li class="list-group-item">
-                          <a href='/requests/<%= user.profile.requests[i].id %>'>
-                              <%= user.profile.requests[i].title %>
-                          </a>
-                          <span class="badge" style="background: purple">4 replies</span>
-                      </li>
-                      <% } %>
+                                    <li class="list-group-item">
+                                        <a href='/requests/<%= user.profile.requests[i].id %>'>
+                                            <%= user.profile.requests[i].title %>
+                                        </a>
+                                        <span class="badge" style="background: purple">4 replies</span>
+                                    </li>
+                                    <% } %>
 
-            </ul>
-          </div>
-          <div class="col-md-12">
-            <h1>Reply</h1>
-            <ul class="list-group">
-              <% if(user.profile.replies.length == 0){%>
-                  <h3 style="color: grey">No replies yet!</h3>
-                  <br>
-                  <% } %>
-                      <% for( var i=0;i<user.profile.replies.length;i++) { %>
-                          <li class="list-group-item">
-                              <a href='/requests/<%= user.profile.replies[i].id %>'>
-                                  <%= user.profile.replies[i].title %>
-                              </a>
-                              <span class="badge" style="background: red">5 minutes remaining</span>
-                          </li>
-                          <% } %>
+                    </ul>
+                </div>
+                <div class="col-md-12">
+                    <h1>Reply</h1>
+                    <ul class="list-group">
+                        <% if(user.profile.replies.length == 0){%>
+                            <h3 style="color: grey">No replies yet!</h3>
+                            <br>
+                            <% } %>
+                                <% for( var i=0;i<user.profile.replies.length;i++) { %>
+                                    <li class="list-group-item">
+                                        <a href='/requests/<%= user.profile.replies[i].id %>'>
+                                            <%= user.profile.replies[i].title %>
+                                        </a>
+                                        <% if ( user.profile.replies[i].status == "active"){ %>
+                                            <span class="badge" style="background: red">Active<i class="fa fa-star fa-fw"></i></span>
+                                            <% } else{%>
+                                                <span class="badge" style="background: orange">Pending<i class="fa fa-bolt fa-fw"></i></span>
+                                                <%  }%>
+                                    </li>
+                                    <% } %>
 
-            </ul>
-          </div>
-          <div class="col-md-12">
-            <h1>Volunteer</h1>
-            <ul class="list-group">
-              <li class="list-group-item">Meun Check
-                <span class="badge" style="background: gray">0 request</span>
-              </li>
-              <li class="list-group-item">Transport lunch
-                <span class="badge" style="background:purple">3 request</span>
-              </li>
-              <li class="list-group-item">Bring me lunch
-                <span class="badge" style="background: purple">5 request</span>
-              </li>
-            </ul>
-          </div>
+                    </ul>
+                </div>
+                <div class="col-md-12">
+                    <h1>Volunteer</h1>
+                    <ul class="list-group">
+                        <li class="list-group-item">Meun Check
+                            <span class="badge" style="background: gray">0 request</span>
+                        </li>
+                        <li class="list-group-item">Transport lunch
+                            <span class="badge" style="background:purple">3 request</span>
+                        </li>
+                        <li class="list-group-item">Bring me lunch
+                            <span class="badge" style="background: purple">5 request</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <footer class="section section-primary">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <h1>CSCI 3100 Project</h1>
-            <p>Credits</p>
-          </div>
-          <div class="col-sm-6">
-            <p class="text-info text-right">
-              <br>
-              <br>
-            </p>
+        <div class="container">
             <div class="row">
-              <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
-                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
-              </div>
+                <div class="col-sm-6">
+                    <h1>CSCI 3100 Project</h1>
+                    <p>Credits</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-info text-right">
+                        <br>
+                        <br>
+                    </p>
+                    <div class="row">
+                        <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                            <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 hidden-xs text-right">
+                            <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                            <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="row">
-              <div class="col-md-12 hidden-xs text-right">
-                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </footer>
 
 
-</body></html>
+</body>
+
+</html>

@@ -10,6 +10,8 @@
 </head>
 
 <body>
+
+
     <div class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -52,10 +54,23 @@
                 <div class="col-md-6">
                     <h1><%= request.userName %>'s Request</h1>
                     <h3><%= request.requestName %></h3>
-                    <span class="badge" style="background: gray"><%= request.Token %> token</span>
-                    <span class="badge" style="background: purple"><%= request.completeTime %></span>
-                    <span class="badge" style="background: blue"><%= request.Replies.length %> Reply</span>
-                    <span class="badge" style="background: green"><%= request.Catagory %></span>
+                    <span class="label label-default" style="background: gray; font-size:15px "><%= request.Token %> token</span>
+                    <span class="label label-default" style="background: purple; font-size:15px "><%= request.completeTime %></span>
+                    <span class="label label-default" style="background: blue; font-size:15px "><%= request.Replies.length %> Reply</span>
+                    <span class="label label-default" style="background: green; font-size:15px "><%= request.Catagory %></span>
+
+                    <script language="javascript">
+                        function fbshareCurrentPage() {
+                            window.open("https://www.facebook.com/sharer/sharer.php?u=" + escape(window.location.href) + "&t=" + document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+                            return false;
+                        }
+                    </script>
+
+                    <span style="display:block;"> <br> <a style="color: #fff; background-color: #435EAB; padding: 2px 7px 1px 7px; font-family: 'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 15px; text-decoration: none; border-radius: 2px; float: right; margin-top: 1px; margin-right: 45px;"
+                            href="javascript:fbshareCurrentPage()" target="_blank" alt="Share on Facebook">Share@FB</a></span>
+
+                  <span style="display:block;"> <br></span>
+
                     <p>
                         <br>
                         <%= request.description %>
@@ -65,41 +80,46 @@
                     <br>
                     <% var active = false; for( var i=0;i<request.Replies.length;i++){ if(request.Replies[i].status == "active") { active=true; %>
                         <%tmp = " ";%>
-                        <% } } %>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Replies</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <ul class="list-group">
+                            <% } } %>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Replies</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <ul class="list-group">
 
-                                          <% if(request.Replies == 0){%>
-                                              <h3 style="color: grey">No replies yet!</h3>
-                                              <br>
-                                              <% } %>
-                                                  <% for( var i=0;i<request.Replies.length;i++) { %>
+                                                        <% if(request.Replies == 0){%>
+                                                            <h3 style="color: grey">No replies yet!</h3>
+                                                            <br>
+                                                            <% } %>
+                                                                <% for( var i=0;i<request.Replies.length;i++) { %>
 
-                                                      <li class="list-group-item replieUser" value='<%= request.Replies[i].userid %>' value2='<%= request.Replies[i].username%>'>
-                                                          <%= request.Replies[i].username %>
-                                                          <span class="badge" style="background: red">19<i class="fa fa-star fa-fw"></i></span>
-                                                      </li>
-                                                      <% } %>
-                                        </ul>
+                                                                    <li class="list-group-item replieUser" value='<%= request.Replies[i].userid %>' value2='<%= request.Replies[i].username%>'>
+                                                                        <%= request.Replies[i].username %>
+                                                                        <% if ( request.Replies[i].status == "active"){ %>
+                                                                            <span class="badge" style="background: red">Active<i class="fa fa-star fa-fw"></i></span>
+                                                                          <% } else{%>
+                                                                            <span class="badge" style="background: orange">Pending<i class="fa fa-bolt fa-fw"></i></span>
+                                                                        <%  }%>
+                                                                    </li>
+                                                                    <% } %>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <% var active = false; for( var i=0;i<request.Replies.length;i++){ if(request.Replies[i].status == "active") { active=true; %>
-                        <button id = "done" value='<%= request.Replies[i].userid %>' class="btn btn-block btn-default" style="background: yellow"><%= request.Replies[i].username %> is assigned! </button>
-                        <% } } %>
+                                <% var active = false; for( var i=0;i<request.Replies.length;i++){ if(request.Replies[i].status == "active") { active=true; %>
+                                    <button id="done" value='<%= request.Replies[i].userid %>' class="btn btn-block btn-default" style="background: yellow">
+                                        <%= request.Replies[i].username %> is assigned! </button>
+                                    <% } } %>
 
-                    <button id="updateform" class="btn btn-block btn-default" style="background: orange">Edit</button>
+                                        <button id="updateform" class="btn btn-block btn-default" style="background: orange">Edit</button>
 
-                    <button id="delete" class="btn btn-block btn-default" style="background: orange">Cancel Request</button>
+                                        <button id="delete" class="btn btn-block btn-default" style="background: orange">Cancel Request</button>
 
                 </div>
             </div>
@@ -139,6 +159,7 @@
     </footer>
     <script src="//code.jquery.com/jquery-2.2.2.min.js"></script>
     <script src="/javascript/requestedit.js"></script>
+
 
 </body>
 
