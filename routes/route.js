@@ -39,7 +39,7 @@ module.exports = {
                             userName: req.user.profile.displayName,
                             Token: req.body.token,
                             description: req.body.description,
-                            completeTime: "11:50",
+                            completeTime: req.body.expiretime,
                             Catagory: req.body.category
                         },
                         function(err, request, next) {
@@ -521,6 +521,7 @@ module.exports = {
 
                 //console.log("/requests/" + request[0]._id);
                 if (err) throw err;
+                console.log("----+++------");
                 var user;
                 var status;
                 if (req.isAuthenticated()) {
@@ -530,6 +531,11 @@ module.exports = {
                     user = req.user;
                     status = "Logout";
                 }
+                console.log({
+                    request: request,
+                    user: user,
+                    status: status
+                });
                 res.render('request.ejs', {
                     request: request,
                     user: user,
@@ -570,7 +576,7 @@ module.exports = {
                 console.log(req.user);
                 console.log(req.user.profile.replies);
                 console.log(req.user.profile.requests);
-                res.render('user_1.ejs', {
+                res.render('user.ejs', {
                     user: req.user
                 });
             });

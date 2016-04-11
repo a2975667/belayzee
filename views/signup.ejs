@@ -24,16 +24,16 @@
         <!-- LOGIN FORM -->
         <form action="/signup" method="post">
             <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" name="email">
+                <label>Email*</label>
+                <input required type="email" class="form-control" name="email">
             </div>
             <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" name="password">
+                <label>Password*</label>
+                <input required type="password" class="form-control" name="password">
             </div>
             <div class="form-group">
-                <label>Display Name</label>
-                <input type="text" class="form-control" name="displayName">
+                <label>Display Name*</label>
+                <input required type="text" class="form-control" name="displayName">
             </div>
 
             <button type="submit" class="btn btn-warning btn-lg">Signup</button>

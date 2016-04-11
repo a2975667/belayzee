@@ -65,7 +65,7 @@
                                 <label>Title*</label>
                             </div>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="title" placeholder="Title" value = <%= request.requestName %> >
+                                <input type="text" class="form-control" id="title" placeholder="Title" value = <%= request.requestName %> >
                             </div>
                         </div>
                         <div class="form-group">
@@ -73,7 +73,7 @@
                                 <label>Token*</label>
                             </div>
                             <div class="col-sm-10">
-                                <input required type="number" min="1" max="9999" class="form-control" id="token"  placeholder="(1~9999) " value = <%= request.Token %> >
+                                <input type="text" class="form-control" id="token"  placeholder="(1~9999) " value = <%= request.Token %> >
                             </div>
                         </div>
                         <div class="form-group">
@@ -81,15 +81,15 @@
                                 <label>Description*</label>
                             </div>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="description" placeholder="What is it about?" value = <%= request.description %> >
+                                <input type="text" class="form-control" id="description" placeholder="What is it about?" value = <%= request.description %> >
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-2">
-                                <label>Contact Phone Number (Format: XXXX-XXXX)</label>
+                                <label>Expire Time</label>
                             </div>
                             <div class="col-sm-10">
-                                <input type="tel" pattern="[0-9]{4}-[0-9]{4}"  class="form-control" id="expiretime" placeholder="Your 8-digit Phone Number (e.g. 98765432)" value = <%= request.contactphoneno %>>
+                                <input type="text" class="form-control" id="expiretime" placeholder="put in 2.5 for 2 hour and 5 minutes" value = <%= request.completeTime %> >
                             </div>
                         </div>
                         <div class="form-group">

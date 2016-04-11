@@ -5,7 +5,9 @@
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
-  </head><body>
+  </head>
+
+  <body>
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -33,43 +35,59 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <img src="C:\Users\Hsin-Hui\Desktop\_DSC0192 - 複製.jpg" class="img-responsive">
-            <h2>@<%= user.profile.displayName %> &nbsp;
+            <img src="/img/profile_head.jpg" class="img-responsive">
+            <h1>@<%= user.profile.displayName %> &nbsp;</h1>
               <span style="height:1.5em; background:blue" class="badge">100+ Follower</span>
               <span class="badge" style="height:1.5em; background:Green">Cooking Expert</span>
             </h2>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12 text-center">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-2 text-right">
-                        <h3 class="text-center">Account Info</h3>
-                      </div>
-                      <div class="col-md-3">
-                        <h4>&gt; Signup on <%= user.createdAt %>
-                          <br>&gt; Last update on <%= user.updatedAt %></h4>
-                      </div>
-                      <div class="col-md-3">
-                        <h4>&gt; Credit: <%= user.profile.tokens %> remain
-                          <br>&gt; Requests: 4</h4>
-                      </div>
-                      <div class="col-md-3">
-                        <h4>&gt; Pending: 3&nbsp;
-                          <br>&gt; Volunteer: 4</h4>
-                      </div>
-                      <p></p>
-                    </div>
+
+        <div class="section">
+              <div class="container">
+                <div class="row" style="background: #E1E6FA; border-radius: 15px;">
+                  <div class="col-md-4 text-center">
+                    <div>
+                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
+                    <h3 style="display: inline-block;" class="text-center">signup on:</h3>
+                    <br>
+                    <h3> <%= user.createdAt.getFullYear() %> . <%= user.createdAt.getMonth()+1 %> . <%= user.createdAt.getDate() %></h3>
+                  </div>
+                    <hr style="border:0; height:1.5px; background-color:#A9A9A9;">
+                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
+                    <h3 style="display: inline-block;" class="text-center">Last update on:</h3>
+                    <br>
+                    <h3> <%= user.updatedAt.getFullYear() %> . <%= user.updatedAt.getMonth()+1 %> . <%= user.updatedAt.getDate() %></h3>
+                    <hr class="hidden-lg hidden-md" style="border:0; height:1.5px; background-color:#A9A9A9;">
+
+                  </div>
+                  <div class="col-md-4 text-center">
+                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
+                    <h3 style="display: inline-block;" class="text-center">Credit:</h3>
+                    <br>
+                    <h3><%= user.profile.tokens %> tokens remaining</h3>
+                    <hr style="border:0; height:1.5px; background-color:#A9A9A9;">
+                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
+                    <h3 style="display: inline-block;" class="text-center">Requests:</h3>
+                    <br>
+                    <h3> <%= user.profile.requests.length %> request made</h3>
+                    <hr class="hidden-lg hidden-md" style="border:0; height:1.5px; background-color:#A9A9A9;">
+                  </div>
+                  <div class="col-md-4 text-center">
+                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
+                    <h3 style="display: inline-block;" class="text-center">Replies:</h3>
+                    <br>
+                    <h3> <%= user.profile.replies.length %> replies made</h3>
+                    <hr style="border:0; height:1.5px; background-color:#A9A9A9;">
+                    <i class="fa fa-2x fa-clock-o fa-fw" style="display: inline-block; vertical-align:middle"></i>
+                    <h3 style="display: inline-block;" class="text-center">Pending:</h3>
+                    <br><h3></h3>
+                    <hr class="hidden-lg hidden-md" style="border:0; height:1.5px; background-color:#A9A9A9;">
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+
       </div>
     </div>
     <div class="section">
@@ -78,35 +96,32 @@
           <div class="col-md-12">
             <h1>Request</h1>
             <ul class="list-group">
-              <li class="list-group-item">Take care of my pet
-                <span class="badge" style="background: purple">4 replies</span>
-              </li>
-              <li class="list-group-item">Buy me a lunch
-                <span class="badge" style="background: orange">Active</span>
-              </li>
-              <li class="list-group-item">Buy me a cake
-                <span class="badge" style="background: orange">Active</span>
-              </li>
-              <li class="list-group-item">return my books
-                <span class="badge" style="background: green">Complete</span>
-              </li>
+              <% if(user.profile.requests.length == 0){%>
+                  <h3 style="color: grey">No requests yet!</h3>
+                  <br>
+                  <% } %>
+
+              <% for( var i=0;i<user.profile.requests.length;i++) { %>
+                <li class="list-group-item" href="/requests/"<% user.profile.requests[i].id %>><% user.profile.requests[i].title %>
+                  <span class="badge" style="background: purple">4 replies</span>
+                </li>
+              <% } %>
+
             </ul>
           </div>
           <div class="col-md-12">
             <h1>Reply</h1>
             <ul class="list-group">
-              <li class="list-group-item">Bring me lunch
-                <span class="badge" style="background: red">5 minutes remaining</span>
-              </li>
-              <li class="list-group-item">Bring me breakfast
-                <span class="badge" style="background: orange">reply sent</span>
-              </li>
-              <li class="list-group-item">Bring me snack
-                <span class="badge" style="background: green">Complete</span>
-              </li>
-              <li class="list-group-item">buy me a cup of coke
-                <span class="badge" style="background: green">Complete</span>
-              </li>
+              <% if(user.profile.replies.length == 0){%>
+                  <h3 style="color: grey">No replies yet!</h3>
+                  <br>
+                  <% } %>
+              <% for( var i=0;i<user.profile.replies.length;i++) { %>
+                <li class="list-group-item" href="/requests/"<% user.profile.replies[i].id %>><% user.profile.replies[i].title %>
+                  <span class="badge" style="background: red">5 minutes remaining</span>
+                </li>
+              <% } %>
+
             </ul>
           </div>
           <div class="col-md-12">
