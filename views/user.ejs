@@ -101,11 +101,15 @@
                   <br>
                   <% } %>
 
-              <% for( var i=0;i<user.profile.requests.length;i++) { %>
-                <li class="list-group-item" href="/requests/"<% user.profile.requests[i].id %>><% user.profile.requests[i].title %>
-                  <span class="badge" style="background: purple">4 replies</span>
-                </li>
-              <% } %>
+                  <% for( var i=0;i<user.profile.requests.length;i++) { %>
+
+                      <li class="list-group-item">
+                          <a href='/requests/<%= user.profile.requests[i].id %>'>
+                              <%= user.profile.requests[i].title %>
+                          </a>
+                          <span class="badge" style="background: purple">4 replies</span>
+                      </li>
+                      <% } %>
 
             </ul>
           </div>
@@ -116,11 +120,14 @@
                   <h3 style="color: grey">No replies yet!</h3>
                   <br>
                   <% } %>
-              <% for( var i=0;i<user.profile.replies.length;i++) { %>
-                <li class="list-group-item" href="/requests/"<% user.profile.replies[i].id %>><% user.profile.replies[i].title %>
-                  <span class="badge" style="background: red">5 minutes remaining</span>
-                </li>
-              <% } %>
+                      <% for( var i=0;i<user.profile.replies.length;i++) { %>
+                          <li class="list-group-item">
+                              <a href='/requests/<%= user.profile.replies[i].id %>'>
+                                  <%= user.profile.replies[i].title %>
+                              </a>
+                              <span class="badge" style="background: red">5 minutes remaining</span>
+                          </li>
+                          <% } %>
 
             </ul>
           </div>
