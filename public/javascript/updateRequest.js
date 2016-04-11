@@ -19,8 +19,12 @@ $("#requestForm").submit(function(e){
           url: "/update/request/"+ getRequestId(),
           type: type,
           data: data,
-          success: function(data){
-            console.log(data);
+          error: function(xhr) {
+              $("#message").text(xhr.statusText);
+              console.log(xhr.statusText);
+          },
+          success: function(result) {
+            console.log("ok");
           }
       });
       console.log(data);
