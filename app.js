@@ -25,6 +25,8 @@ db.once('open', function () {
     console.log("Connected correctly to database server");
 });
 
+
+
 //Passport setup
 var passport = require('passport');
 

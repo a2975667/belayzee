@@ -21,6 +21,8 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+
+
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -84,3 +86,27 @@ function onListening() {
     var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
     debug('Listening on ' + bind);
 }
+
+
+
+//Socket.IO
+var io = require( 'socket.io' )( server );
+io.on( 'connection', function( socket ) {
+  var id;
+
+  console.log( 'New user connected' );
+  socket.on( 'disconnect', function() {
+    console.log( 'User disconnected' );
+  } );
+
+  socket.on( 'register', function( data ) {
+    console.log( 'User registered. Room ID = ' + data );
+    id = data;
+    socket.join( data );
+  } );
+
+  socket.on( 'chat', function( data ) {
+    console.log( 'Message: ' + data );
+    io.to( id ).emit( 'chat', data );
+  } );
+} );

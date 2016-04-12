@@ -49,7 +49,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="/img/<%= request.Catagory %>.jpg" class="center-block img-responsive">
+                    <div class="row-md-6">
+                        <img src="/img/<%= request.Catagory %>.jpg" class="img-responsive">
+                        <br>
+                    </div>
+                    <div class="row-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Instant chat with the Requester -- <%= request.userName %></div>
+                            <div class="panel-body">
+                                <ul id="messages" class="list-unstyled"></ul>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Chat Box</div>
+                            <div class="panel-body">
+                                <form id="form">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="m" autocomplete="off" placeholder="Type your message here e.g. Hi <%= request.userName %>" />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block">Send</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <h1><%= request.userName %>'s Request</h1>
@@ -159,7 +181,31 @@
     </footer>
     <script src="//code.jquery.com/jquery-2.2.2.min.js"></script>
     <script src="/javascript/requestedit.js"></script>
-
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            // Retrieve room ID
+            if ( ! Array.prototype.last ) {
+                Array.prototype.last = (function() {
+                    return this[ this.length - 1 ];
+                });
+            }
+            var id = window.location.href.split( '/' ).last();
+            
+            // Register
+            var socket = io();
+            socket.emit( 'register', id );
+            // Chat room logic
+            var $m = $( '#m' );
+            var $messages = $( '#messages' );
+            $( '#form' ).on( 'submit', function( e ) {
+                e.preventDefault();
+                socket.emit( 'chat', $m.val() );
+                $m.val( '' );
+            } );
+            socket.on( 'chat', function( data ) {
+                $messages.append( '<li>' + '[<%= user.profile.displayName %>](Requester): ' + data + '</li>' );
+            } );
+        </script>
 
 </body>
 
