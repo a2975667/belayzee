@@ -71,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6">
                     <h1><%= request.userName %>'s Request</h1>
                     <h3 id="rname" ><%= request.requestName %></h3>
@@ -143,7 +143,7 @@
                 });
             }
             var id = window.location.href.split( '/' ).last();
-            
+
             // Register
             var socket = io();
             socket.emit( 'register', id );

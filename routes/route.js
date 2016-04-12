@@ -288,7 +288,19 @@ app.get('/aboutus', function(req, res){
                             replyStat = true;
                         }
                     } else {
-                        user = req.user;
+                        user = {
+                            local: {},
+                            facebook: {},
+                            twitter: {},
+                            google: {},
+                            profile: {
+                                tokens: 0,
+                                requests: [],
+                                replies: [],
+                                displayName: 'Public user'
+                            },
+                            _id: "xxxxxxxx"
+                        }
                         status = "Logout";
                         //renderfile = "login.ejs"
                     }
