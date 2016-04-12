@@ -24,11 +24,11 @@ module.exports = {
             });
         });
 
-app.get('/aboutus', function(req, res){
-  res.render('about_us.ejs',{
-    user: req.user
-  });
-});
+        app.get('/aboutus', function(req, res) {
+            res.render('about_us.ejs', {
+                user: req.user
+            });
+        });
 
         app.get('/request', isLoggedIn, function(req, res) {
             res.render('form', {
@@ -525,52 +525,52 @@ app.get('/aboutus', function(req, res){
 
                 });
         });
-        app.post('/updateDisplay', function(req,res){
-          var uid = req.user._id;
-          var newname = req.body.dname;
-          var rp = [];
-          var rq = [];
-          var checking = [];
-          console.log("_id:" +  uid);
-          User.findById(uid,
-              function(err, user) {
-                  if (err) throw err;
-                  console.log(user);
-                  user.profile.displayName = newname;
-                  rq = getRQRSIdFromList(user.profile.requests);
-                  rp = getRQRSIdFromList(user.profile.replies);
-                  console.log(rq);
-                  console.log(rp);
-                  for (var kk = 0; kk < rq.length; kk++){
-                    Requests.findByIdAndUpdate(rq[kk], {
-                      userName: newname
-                    }, {
-                      new: true
-                    }, function(err, request) {
-                      if (err) throw err;
-                      console.log("request_updated");
-                    });
-                  }
-                  for (var kk = 0; kk < rp.length; kk++){
-                    Requests.findById(rp[kk],function(err, request){
-                      for (var hh=0; hh< request.Replies.length; hh++){
-                        if ((request.Replies[hh].userid+'') == (uid+'')){
-                          console.log(request.Replies[hh].username);
-                          request.Replies[hh].username = newname;
-                        }
-                        request.save(function(err, request){
-                          if (err) throw err;
-                          console.log("OOOOOOOKLA!")
+        app.post('/updateDisplay', function(req, res) {
+            var uid = req.user._id;
+            var newname = req.body.dname;
+            var rp = [];
+            var rq = [];
+            var checking = [];
+            console.log("_id:" + uid);
+            User.findById(uid,
+                function(err, user) {
+                    if (err) throw err;
+                    console.log(user);
+                    user.profile.displayName = newname;
+                    rq = getRQRSIdFromList(user.profile.requests);
+                    rp = getRQRSIdFromList(user.profile.replies);
+                    console.log(rq);
+                    console.log(rp);
+                    for (var kk = 0; kk < rq.length; kk++) {
+                        Requests.findByIdAndUpdate(rq[kk], {
+                            userName: newname
+                        }, {
+                            new: true
+                        }, function(err, request) {
+                            if (err) throw err;
+                            console.log("request_updated");
                         });
-                      }
+                    }
+                    for (var kk = 0; kk < rp.length; kk++) {
+                        Requests.findById(rp[kk], function(err, request) {
+                            for (var hh = 0; hh < request.Replies.length; hh++) {
+                                if ((request.Replies[hh].userid + '') == (uid + '')) {
+                                    console.log(request.Replies[hh].username);
+                                    request.Replies[hh].username = newname;
+                                }
+                                request.save(function(err, request) {
+                                    if (err) throw err;
+                                    console.log("OOOOOOOKLA!")
+                                });
+                            }
 
+                        });
+                    }
+                    user.save(function(err, user) {
+                        if (err) throw err;
+                        console.log("updated user");
                     });
-                  }
-                  user.save(function(err, user) {
-                      if (err) throw err;
-                      console.log("updated user");
-                  });
-              });
+                });
 
         });
         //login--get//
@@ -581,12 +581,32 @@ app.get('/aboutus', function(req, res){
         });
 
         app.get('/requests', function(req, res, next) {
-            //var request={};
+            var keyword;
+            var search;
+            if (req.query.keyword) {
+                search = "on";
+                keyword = req.query.keyword;
+            } else {
+                search = "off";
+                console.log("NOOOOOOO SEARCH");
+            }
+            console.log(keyword);
             Requests.find({}, function(err, request) {
-
-                //console.log("/requests/" + request[0]._id);
                 if (err) throw err;
-                console.log("----+++------");
+                if (search == "on") {
+                    var tmp = [];
+                    for (var jj = 0; jj < request.length; jj++) {
+                        if (request[jj].description.indexOf(keyword) >= 0 ||
+                            request[jj].requestName.indexOf(keyword) >= 0 ||
+                            request[jj].userName.indexOf(keyword) >= 0) {
+                            tmp.push(request[jj]);
+                        }
+                    }
+                    request = tmp;
+                }
+                console.log(request);
+                //console.log("/requests/" + request[0]._id);
+
                 var user;
                 var status;
                 if (req.isAuthenticated()) {
@@ -596,15 +616,17 @@ app.get('/aboutus', function(req, res){
                     user = req.user;
                     status = "Logout";
                 }
-                console.log({
-                    request: request,
-                    user: user,
-                    status: status
-                });
+                /*    console.log({
+                        request: request,
+                        user: user,
+                        status: status
+                    });*/
                 res.render('request.ejs', {
                     request: request,
                     user: user,
-                    status: status
+                    status: status,
+                    search: search,
+                    keyword: keyword
                 });
             });
         });
@@ -668,10 +690,10 @@ function isLoggedIn(req, res, next) {
     res.redirect('/login');
 }
 
-function getRQRSIdFromList (listar){
-  var tmpar = [];
-  for (var mm = 0; mm< listar.length; mm++){
-    tmpar.push(listar[mm].id);
-  }
-  return tmpar;
+function getRQRSIdFromList(listar) {
+    var tmpar = [];
+    for (var mm = 0; mm < listar.length; mm++) {
+        tmpar.push(listar[mm].id);
+    }
+    return tmpar;
 }
