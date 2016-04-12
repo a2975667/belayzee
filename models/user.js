@@ -36,7 +36,7 @@ var userSchema = mongoose.Schema({
         displayName: String,
         tokens: {
             type: Number,
-            default: 0
+            default: 1000
         },
         requests: [{
           id: String,

@@ -38,9 +38,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <img src="/img/profile_head.jpg" class="img-responsive">
-                    <h1>@<%= user.profile.displayName %> &nbsp;</h1>
-                    <span style="height:1.5em; background:blue" class="badge">100+ Follower</span>
-                    <span class="badge" style="height:1.5em; background:Green">Cooking Expert</span>
+                    <h1 style="text-align:left;float:left;">@</h1>
+                    <h1 id="DisN" style="text-align:left;float:left;"><%= user.profile.displayName %></h1>
+                    <hr style="clear:both;"/>
+                    <span id = "edit" style="font-size:17px; height:1.5em; background:blue" class="badge">Edit</span>
+                    <span id = "ok" value='<%=user._id %>' style="font-size:17px; height:1.5em; background:blue" class="badge">OK</span>
+                    <script>$("#ok").hide();</script>
+
+                    <!--<span class="badge" style="height:1.5em; background:Green">Cooking Expert</span>-->
                     </h2>
                 </div>
             </div>
@@ -194,6 +199,7 @@
                 </div>
             </div>
         </div>
+        <script src="/javascript/user.js"></script>
     </footer>
 
 

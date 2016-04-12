@@ -10,32 +10,6 @@
 </head>
 
 <body>
-
-  <div class = "hidden-sm hidden-xs hidden-md" style="position: fixed; width: 100%; height: 100%">
-    <iframe frameborder="0" height="100%" width="100%"
-      src="https://youtube.com/embed/DSLgAsrcpGQ?autoplay=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=DSLgAsrcpGQ&hd=1">
-    </iframe>
-  </div>
-
-  <style>
-  @media (min-width: 992px) {
-    h1{color:white}
-    h3{color:white}
-    p{color:white}
-    li{color :white}
-}
-
-/* Anything Smaller than Large  */
-@media (max-width: 991px) {
-  h1{color:black}
-  h3{color:black}
-  p{color:black}
-  li{color :black}
-}
-
-
-  </style>
-
     <div class="cover">
         <div class="navbar">
             <div class="container">
@@ -48,7 +22,7 @@
                     </button>
                 </div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav navbar-right" style="color: white">
+                    <ul class="nav navbar-nav navbar-right" style="background: white">
                         <li>
                             <%if (status == "Login") { %>
 
@@ -68,23 +42,20 @@
                 </div>
             </div>
         </div>
-        <div class="hidden-lg cover-image" style="background-image : url('https://unsplash.imgix.net/photo-1422405153578-4bd676b19036?w=1024&amp;q=50&amp;fm=jpg&amp;s=5ecc4c704ea97d85ea550f84a1499228')"></div>
+        <div class="cover-image" style="background-image : url('https://unsplash.imgix.net/photo-1422405153578-4bd676b19036?w=1024&amp;q=50&amp;fm=jpg&amp;s=5ecc4c704ea97d85ea550f84a1499228')"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                  <style>h1{color:white}</style>
-                    <h1 contenteditable="true" class="text-center">
-                      <span style="color:white">BeLayzee</span>
-                    </h1>
+                    <h1 contenteditable="true" class="text-center">BeLayzee</h1>
                     <p>Life is short
                         <br>Focus on the most import things if you have to</p>
                     <br>
 
-                    <a href="\request" class="btn btn-lg btn-primary">Start Request</a>&nbsp;&nbsp;
-                    <!--<a href="\volunteer" class="btn btn-lg btn-primary">Do a volunteer</a>-->
+                    <a href="\request" class="btn btn-lg btn-primary">Start a request</a>&nbsp;&nbsp;
+                    <a href="\volunteer" class="btn btn-lg btn-primary">Do a volunteer</a>
                     <br><br>
-                    <a href="\requests" class="btn btn-lg btn-primary">Existing Requests</a>&nbsp;&nbsp;
-                    <!--<a href="\volunteers" class="btn btn-lg btn-primary">See existing volunteers</a>-->
+                    <a href="\requests" class="btn btn-lg btn-primary">See existing requests</a>&nbsp;&nbsp;
+                    <a href="\volunteers" class="btn btn-lg btn-primary">See existing volunteers</a>
                 </div>
             </div>
         </div>
@@ -96,7 +67,6 @@
                     <img src="https://ununsplash.imgix.net/photo-1421098518790-5a14be02b243?w=1024&amp;q=50&amp;fm=jpg&amp;s=24665881d66f79925810c2deb7e486b9" class="img-responsive">
                 </div>
                 <div class="col-md-6">
-
                     <h1>There's just too little time</h1>
                     <h3>Focus on what you need</h3>
                     <p>BLaBlaBla</p>

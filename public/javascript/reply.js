@@ -21,7 +21,10 @@ $(document).ready(function() {
               console.log("ok");
             }
         });
-        location.reload();
+        setTimeout(function () {
+   location.reload(); //will redirect to your blog page (an ex: blog.html)
+}, 1000);
+
       }
     });
 
@@ -42,7 +45,9 @@ $(document).ready(function() {
               console.log("ok");
             }
         });
-        location.reload();
+        setTimeout(function () {
+   location.reload(); //will redirect to your blog page (an ex: blog.html)
+}, 1000);
     });
 
     return false;

@@ -87,8 +87,19 @@
 
                 <script>
                     function filter(id) {
-                        var k;
-                        var a = ["food", "household", "school", "dorm", "professional", "random", "relationship", "other"];
+                        var k,n;
+                        var a = ["all","food", "household", "school", "dorm", "professional", "random", "relationship", "other"];
+
+                        for (var i=0;i<a.length;i++) {
+                          if (a[i]!=id) {
+                            n = document.getElementById(a[i]);
+                            n.className = "list-group-item";
+                          }
+                        }
+
+                        n = document.getElementById(id);
+                        n.className = "list-group-item active";
+
                         if(id == "all"){
                             var x = $("ul#rq>div");
                             for (var i = 0; i < x.length; i++) {
@@ -115,7 +126,7 @@
             <% var link = "/requests/" + String(request[i]._id); %>
             <div class="<%= request[i].Catagory %>">
               <div class="col-md-4">
-                <a class="active" href=<%= link %>><img src="https://ununsplash.imgix.net/photo-1421098518790-5a14be02b243?w=1024&amp;q=50&amp;fm=jpg&amp;s=24665881d66f79925810c2deb7e486b9" style="width:30em;" class="center-block img-responsive"></a>
+                <a class="active" href=<%= link %>><img src="/img/<%= request[i].Catagory %>.jpg" style="width:30em;" class="center-block img-responsive"></a>
                 <h1><%= request[i].userName %>'s Request</h1>
                 <p><%= request[i].requestName %> </p>
               </div>

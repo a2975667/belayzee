@@ -49,7 +49,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="/img/<%= request.Catagory %>.jpg" class="center-block img-responsive">
+                    <img src="https://unsplash.imgix.net/photo-1420708392410-3c593b80d416?w=1024&amp;q=50&amp;fm=jpg&amp;s=db450320d7ee6de66c24c9b0bf2de3c6" class="center-block img-responsive">
                 </div>
                 <div class="col-md-6">
                     <h1><%= request.userName %>'s Request</h1>
@@ -69,7 +69,7 @@
                     <span style="display:block;"> <br> <a style="color: #fff; background-color: #435EAB; padding: 2px 7px 1px 7px; font-family: 'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif; font-size: 15px; text-decoration: none; border-radius: 2px; float: right; margin-top: 1px; margin-right: 45px;"
                             href="javascript:fbshareCurrentPage()" target="_blank" alt="Share on Facebook">Share@FB</a></span>
 
-                  <span style="display:block;"> <br></span>
+                    <span style="display:block;"> <br></span>
 
                     <p>
                         <br>
@@ -99,11 +99,11 @@
 
                                                                     <li class="list-group-item replieUser" value='<%= request.Replies[i].userid %>' value2='<%= request.Replies[i].username%>'>
                                                                         <%= request.Replies[i].username %>
-                                                                        <% if ( request.Replies[i].status == "active"){ %>
-                                                                            <span class="badge" style="background: red">Active<i class="fa fa-star fa-fw"></i></span>
-                                                                          <% } else{%>
-                                                                            <span class="badge" style="background: orange">Pending<i class="fa fa-bolt fa-fw"></i></span>
-                                                                        <%  }%>
+                                                                            <% if ( request.Replies[i].status == "active"){ %>
+                                                                                <span class="badge" style="background: red">Active<i class="fa fa-star fa-fw"></i></span>
+                                                                                <% } else{%>
+                                                                                    <span class="badge" style="background: orange">Pending<i class="fa fa-bolt fa-fw"></i></span>
+                                                                                    <%  }%>
                                                                     </li>
                                                                     <% } %>
                                                     </ul>

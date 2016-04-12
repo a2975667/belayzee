@@ -82,21 +82,26 @@
                     <button style="width:100%" class="list-group-item" onclick="filter(id)" id="professional">Professional subject</button>
                     <button style="width:100%" class="list-group-item" onclick="filter(id)" id="random">Random stuffs</button>
                     <button style="width:100%" class="list-group-item" onclick="filter(id)" id="relationship">Relationship</button>
-                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="others">Others</button>
+                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="other">Others</button>
                 </ul>
-                
+
                 <script>
                     function filter(id) {
                         var k;
-                        var a = ["food", "household", "school", "dorm", "professional", "random", "relationship", "others"];
-                        for (k = 0; k < a.length; k++) {
-                            var x = document.getElementsByClassName(a[k]);
-                            var i;
-                            for (i = 0; i < x.length; i++) {
-                                if (a[k] == id || id == "all")
+                        var a = ["food", "household", "school", "dorm", "professional", "random", "relationship", "other"];
+                        if(id == "all"){
+                            var x = $("ul#rq>div");
+                            for (var i = 0; i < x.length; i++) {
                                     x[i].style.display = "inline";
-                                else
+                            }
+                        }else{
+                          var x = $("ul#rq>div").not("." + id)
+                          var y = $("ul#rq ." + id);
+                            for (var i = 0; i < x.length; i++) {
                                     x[i].style.display = "none";
+                            }
+                            for (var i = 0; i < y.length; i++) {
+                                    y[i].style.display = "inline";
                             }
                         }
                     }
@@ -105,18 +110,18 @@
               </div>
             </div>
           </div>
-
-          </ul>
+          <ul id="rq" class=>
           <% for(var i= (request.length-1) ;i>=0;i--) { %>
-          <% var link = "/requests/" + String(request[i]._id); %>
-          <div class="col-md-4">
-            <a class="active" href=<%= link %>><img src="https://ununsplash.imgix.net/photo-1421098518790-5a14be02b243?w=1024&amp;q=50&amp;fm=jpg&amp;s=24665881d66f79925810c2deb7e486b9" style="width:30em;" class="center-block img-responsive"></a>
-            <h1><%= request[i].userName %>'s Request</h1>
-            <p><%= request[i].requestName %></p>
-          </div>
+            <% var link = "/requests/" + String(request[i]._id); %>
+            <div class="<%= request[i].Catagory %>">
+              <div class="col-md-4">
+                <a class="active" href=<%= link %>><img src="https://ununsplash.imgix.net/photo-1421098518790-5a14be02b243?w=1024&amp;q=50&amp;fm=jpg&amp;s=24665881d66f79925810c2deb7e486b9" style="width:30em;" class="center-block img-responsive"></a>
+                <h1><%= request[i].userName %>'s Request</h1>
+                <p><%= request[i].requestName %> </p>
+              </div>
+            </div>
           <% } %>
-          </ul>
-
+        </ul>
         </div>
 
     </div><footer class="section section-primary">
