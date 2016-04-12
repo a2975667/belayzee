@@ -3,15 +3,33 @@
 <html>
 <head>
     <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
     <style>
-        body        { padding-top:80px; }
+
+        footer {
+          position:fixed;
+          width:100%;
+          bottom:-80px;
+        }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container" >
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/"><span>BeLayzee</span></a>
+            </div>
 
+        </div>
+    </div>
+    <!--img src="/img/profile_head.jpg" class="img-responsive"-->
+    <br></br>
     <div class="col-sm-6 col-sm-offset-3">
 
         <h1><span class="fa fa-sign-in"></span> Login</h1>
@@ -39,9 +57,45 @@
 
         <p>Need an account? <a href="/signup">Signup</a></p>
         <p>Or go <a href="/">home</a>.</p>
-
+<br><br><br>
     </div>
 
 </div>
+
+<footer class="section section-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>CSCI 3100 Project</h1>
+                <a href="/aboutus" style="color:white">Credits</a>
+            </div>
+            <div class="col-sm-6">
+                <p class="text-info text-right">
+                    <br>
+                    <br>
+                </p>
+                <div class="row">
+                    <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                        <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                        <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                        <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                        <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 hidden-xs text-right">
+                        <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                        <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                        <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                        <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="//code.jquery.com/jquery-2.2.2.min.js"></script>
+<script src="/javascript/requestedit.js"></script>
+
 </body>
 </html>

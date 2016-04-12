@@ -263,11 +263,14 @@ module.exports = {
                 });
         });
 
-        app.get('/requests/:requestId', function(req, res) {
+        app.get('/requests/:requestId', function(req, res, next) {
             Requests.findById(
                 req.params.requestId,
                 function(err, request) {
-                    if (err) throw err;
+                    //if (err) throw err;
+                    if (err) {
+                        return next(new Error());
+                    }
                     var user;
                     var status;
                     var replyStat = false;
@@ -396,8 +399,7 @@ module.exports = {
                 function(err, request) {
                     console.log(request);
                     if (err) {
-                        return next(new Error("Can't divide by zero"));
-                        //throw err;
+                        return next(new Error());
                     }
                     var user = req.user;
                     var status = "Login";

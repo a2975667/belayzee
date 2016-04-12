@@ -5,6 +5,8 @@
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+
+
   </head><body>
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -19,6 +21,12 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="/request">Start a Request</a>
+            </li>
+            <li>
+                <a href="/requests">See all Requests</a>
+            </li>
               <li>
                   <%if (status == "Login") { %>
 
@@ -44,15 +52,21 @@
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-12">
-              <div class="page-header" contenteditable="true">
-                <h1>Requests</h1>
+              <div class="page-header" display:"margin-bottom: 0px;">
+                <h1>Requests<% if (search == "on"){%>
+                  : <%=keyword%> &nbsp&nbsp&nbsp&nbsp&nbsp
+                     <button  class="btn btn-info" display="padding: 0em" onclick="location.href = '/requests';"> Clear </button>
+
+
+                <% }%></h1>
+
               </div>
-              <form role="form">
+              <form action="/requests/?keyword=" method="get" role="form">
                 <div class="form-group">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="KeyWord">
+                    <input id="searchbox" type="text" name="keyword" class="form-control" placeholder="KeyWord">
                     <span class="input-group-btn">
-                      <a class="btn btn-primary" type="submit">Find a Request</a>
+                      <button id="search" class="btn btn-primary" type="submit">Find a Request</button>
                     </span>
                   </div>
                 </div>
@@ -69,26 +83,36 @@
           <div class="col-md-4">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title">Filter</h3>
+                <h2 class="panel-title">Filter: Categories</h2>
               </div>
               <div class="panel-body">
-                <h3>Catagory</h3>
                 <ul class="list-group">
-                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="all">All</button>
-                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="food">Food and beverage</button>
-                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="household">Household Related</button>
-                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="school">School life</button>
-                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="dorm">Dorm life</button>
-                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="professional">Professional subject</button>
-                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="random">Random stuffs</button>
-                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="relationship">Relationship</button>
-                    <button style="width:100%" class="list-group-item" onclick="filter(id)" id="other">Others</button>
+                    <button style="width:100%; font-size: 1.3em" class="list-group-item" onclick="filter(id)" id="all">All</button>
+                    <button style="width:100%; font-size: 1.3em" class="list-group-item" onclick="filter(id)" id="food">Food and beverage</button>
+                    <button style="width:100%; font-size: 1.3em" class="list-group-item" onclick="filter(id)" id="household">Household Related</button>
+                    <button style="width:100%; font-size: 1.3em" class="list-group-item" onclick="filter(id)" id="school">School life</button>
+                    <button style="width:100%; font-size: 1.3em" class="list-group-item" onclick="filter(id)" id="dorm">Dorm life</button>
+                    <button style="width:100%; font-size: 1.3em" class="list-group-item" onclick="filter(id)" id="professional">Professional subject</button>
+                    <button style="width:100%; font-size: 1.3em" class="list-group-item" onclick="filter(id)" id="random">Random stuffs</button>
+                    <button style="width:100%; font-size: 1.3em" class="list-group-item" onclick="filter(id)" id="relationship">Relationship</button>
+                    <button style="width:100%; font-size: 1.3em" class="list-group-item" onclick="filter(id)" id="other">Others</button>
                 </ul>
 
                 <script>
                     function filter(id) {
-                        var k;
-                        var a = ["food", "household", "school", "dorm", "professional", "random", "relationship", "other"];
+                        var k,n;
+                        var a = ["all","food", "household", "school", "dorm", "professional", "random", "relationship", "other"];
+
+                        for (var i=0;i<a.length;i++) {
+                          if (a[i]!=id) {
+                            n = document.getElementById(a[i]);
+                            n.className = "list-group-item";
+                          }
+                        }
+
+                        n = document.getElementById(id);
+                        n.className = "list-group-item active";
+
                         if(id == "all"){
                             var x = $("ul#rq>div");
                             for (var i = 0; i < x.length; i++) {
@@ -109,15 +133,28 @@
 
               </div>
             </div>
+
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h2 class="panel-title">Statistics</h2>
+              </div>
+              <div class="panel-body">
+                <ul class="list-group">
+                    <h4 style="width:100%; text-align: center " class="list-group-item">Number of Requests: <%= request.length %></h4>
+                </ul>
+              </div>
+            </div>
+
           </div>
           <ul id="rq" class=>
           <% for(var i= (request.length-1) ;i>=0;i--) { %>
             <% var link = "/requests/" + String(request[i]._id); %>
             <div class="<%= request[i].Catagory %>">
-              <div class="col-md-4">
-                <a class="active" href=<%= link %>><img src="https://ununsplash.imgix.net/photo-1421098518790-5a14be02b243?w=1024&amp;q=50&amp;fm=jpg&amp;s=24665881d66f79925810c2deb7e486b9" style="width:30em;" class="center-block img-responsive"></a>
-                <h1><%= request[i].userName %>'s Request</h1>
-                <p><%= request[i].requestName %> </p>
+              <div class="col-md-4" style=" min-height: 27em; max-height:27em;">
+
+                <a class="active" href=<%= link %>><img src="/img/<%= request[i].Catagory %>.jpg" style="width:30em;" class="center-block img-responsive"></a>
+                <h2><%= request[i].userName %>'s Request</h2>
+                <h4><%= request[i].requestName %> </h4>
               </div>
             </div>
           <% } %>
@@ -129,7 +166,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <h1>CSCI 3100 Project</h1>
-                        <p>Credits</p>
+                        <a href="/aboutus" style="color:white">About Us</a>
                     </div>
                     <div class="col-sm-6">
                         <p class="text-info text-right">
@@ -155,6 +192,7 @@
                     </div>
                 </div>
             </div>
+            <script src="//code.jquery.com/jquery-2.2.2.min.js"></script>
         </footer>
 
 

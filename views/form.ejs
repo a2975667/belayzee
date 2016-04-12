@@ -23,6 +23,12 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/request">Start a Request</a>
+                    </li>
+                    <li>
+                        <a href="/requests">See all Requests</a>
+                    </li>
                     <li class="active">
                         <a href="/profile">
                             <%= user.profile.displayName %>'s Profile</a>
@@ -52,7 +58,7 @@
                             <a href="/request">Request</a>
                         </li>
                         <li>
-                            <a href="/volunteer">Volunteer</a>
+
                         </li>
                     </ul>
                     <br>
@@ -73,7 +79,7 @@
                                 <label>Token*</label>
                             </div>
                             <div class="col-sm-10">
-                                <input required type="number" value="1" min="1" max="9999" class="form-control" id="token" placeholder="(1~9999)">
+                                <input required type="number" value="1" min="1" max="<%= user.profile.tokens %>" title="You might have exceed your token limit." class="form-control" id="token" placeholder="(1~9999)">
                             </div>
                         </div>
                         <div class="form-group">
@@ -102,9 +108,9 @@
                                     <option value="house">Household Related</option>
                                     <option value="school">School life</option>
                                     <option value="dorm">Dorm life</option>
-                                    <option value="prof">Professional subject</option>
+                                    <option value="professional">Professional subject</option>
                                     <option value="random">Random stuffs</option>
-                                    <option value="relation">Relationship</option>
+                                    <option value="relationship">Relationship</option>
                                     <option value="other">Others</option>
                                 </select>
                             </div>
@@ -153,7 +159,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h1>CSCI 3100 Project</h1>
-                    <p>Credits</p>
+                    <a href="/aboutus" style="color:white">About Us</a>
                 </div>
                 <div class="col-sm-6">
                     <p class="text-info text-right">
