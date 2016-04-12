@@ -53,6 +53,7 @@
                         <img src="/img/<%= request.Catagory %>.jpg" class="img-responsive">
                         <br>
                     </div>
+                    <%if (status == "Login") { %>
                     <div class="row-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">Instant chat with the Requester -- <%= request.userName %></div>
@@ -72,6 +73,7 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
                 </div>
                 <div class="col-md-6">
                     <h1><%= request.userName %>'s Request</h1>
@@ -199,11 +201,11 @@
             var $messages = $( '#messages' );
             $( '#form' ).on( 'submit', function( e ) {
                 e.preventDefault();
-                socket.emit( 'chat', $m.val() );
+                socket.emit( 'chat', '[<%= user.profile.displayName %>](Requester): ' + $m.val() );
                 $m.val( '' );
             } );
             socket.on( 'chat', function( data ) {
-                $messages.append( '<li>' + '[<%= user.profile.displayName %>](Requester): ' + data + '</li>' );
+                $messages.append( '<li>' +  data + '</li>' );
             } );
         </script>
 

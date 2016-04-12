@@ -51,6 +51,7 @@
                         <img src="/img/<%= request.Catagory %>.jpg" class="img-responsive">
                         <br>
                     </div>
+                    <%if (status == "Login") { %>
                     <div class="row-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">Instant chat with the Replyers</div>
@@ -70,6 +71,7 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
                 </div>
 
                 <div class="col-md-6">
@@ -88,12 +90,15 @@
                     <br>
 
                     <div>
+                    <%if (status != "Login") { %>
+                        <button id="reply" class="btn btn-block btn-default" style="background: aqua">Login to Reply</button>
+                    <% }else {%>
                         <%if (replyStat) { %>
-
                             <button id="replied" class="btn btn-block btn-default" style="background: orange">Repled</button>
-                            <% } else {%>
-                                <button id="reply" class="btn btn-block btn-default" style="background: aqua">Reply</button>
-                                <% }%>
+                        <% } else {%>
+                            <button id="reply" class="btn btn-block btn-default" style="background: aqua">Reply</button>
+                        <% }%>
+                    <% }%>
                     </div>
 
                 </div>
@@ -152,11 +157,11 @@
             var $messages = $( '#messages' );
             $( '#form' ).on( 'submit', function( e ) {
                 e.preventDefault();
-                socket.emit( 'chat', $m.val() );
+                socket.emit( 'chat', '[<%= user.profile.displayName %>](Replyer): ' + $m.val() );
                 $m.val( '' );
             } );
             socket.on( 'chat', function( data ) {
-                $messages.append( '<li>' + '[<%= user.profile.displayName %>](Replyer): ' + data + '</li>' );
+                $messages.append( '<li>' + data + '</li>' );
             } );
         </script>
 </body>
