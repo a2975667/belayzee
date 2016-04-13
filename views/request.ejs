@@ -212,28 +212,29 @@
             <% var link = "/requests/" + String(request[i]._id); %>
 
             <div class="<%= request[i].Catagory %>">
-              <div class="col-md-4" style=" min-height: 27em; max-height:27em;" >
+              <div class="col-md-4" style=" min-height: 25em; max-height:25em;" >
 
                 <div class="hidden-sm hidden-xs hidden-md">
                 <div class="mosaic-block bar">
                   <div class="mosaic-overlay">
             				<div class="details">
-            					<h4 style="color:white"><%= request[i].description %></h4>
+            					<h3 style="color:white"><%= request[i].requestName %></h3>
             					<h4 style="color:white"><%= request[i].Token %> Tokens</h4>
             				</div>
             			</div>
-                  <a class="active" class="mosaic-backdrop" href=<%= link %>><img src="/img/<%= request[i].Catagory %>.jpg" style="width:30em;" ></a>
+                  <a class="active" class="mosaic-backdrop" href=<%= link %>><img src="/img/<%= request[i].Catagory %>.jpg" style="width:100%; border-radius: 25px;" ></a>
                   <div class="clearfix"></div>
 
                 </div>
-                <h2 style="text-align:center"><%= request[i].userName %>'s Request</h2>
+                <a href=<%= link %> style="color: black"><h3 style="text-align:center; padding-top: 11em;"><%= request[i].userName %>'s Request</h3></a>
                 <!--<h4><%= request[i].requestName %> </h4>-->
               </div>
 
               <div class="hidden-lg">
-                <a class="active" href=<%= link %>><img src="/img/<%= request[i].Catagory %>.jpg" style="width:30em;" class="center-block img-responsive"></a>
-                <h2 style="text-align:center"><%= request[i].userName %>'s Request</h2>
+                <a class="active" href=<%= link %>><img src="/img/<%= request[i].Catagory %>.jpg" style="width:100%; border-radius: 25px;" class="center-block img-responsive"></a>
+                <a href=<%= link %> style="color: black"><h3 style="text-align:center"><%= request[i].userName %>'s Request</h3></a>
                 <h4 style="text-align:center"><%= request[i].requestName %> </h4>
+
             </div>
 
               </div>
