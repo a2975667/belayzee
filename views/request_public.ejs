@@ -83,12 +83,12 @@
                 </div>
 
                 <div class="col-md-6">
-                    <h1><%= request.userName %>'s Request</h1>
-                    <h3 id="rname" ><%= request.requestName %></h3>
-                    <span class="label label-default" style="background: gray; font-size:15px "><%= request.Token %> token</span>
-                    <span class="label label-default" style="background: purple; font-size:15px "><%= request.completeTime %></span>
-                    <span class="label label-default" style="background: blue; font-size:15px "><%= request.Replies.length %> Reply</span>
-                    <span class="label label-default" style="background: green; font-size:15px "><%= request.Catagory %></span>
+                    <h1 id="rname" ><%= request.requestName %></h1>
+                    <h3><%= request.userName %>'s Request</h3>
+                    <span class="label label-default" style="background: #00305A; font-size:15px "><%= request.Token %> token</span>
+                    <span class="label label-default" style="background: #004B8D; font-size:15px "><%= request.completeTime %></span>
+                    <span class="label label-default" style="background: #0074D9; font-size:15px "><%= request.Replies.length %> Reply</span>
+                    <span class="label label-default" style="background: #4192D9; font-size:15px "><%= request.Catagory %></span>
                     <p>
                         <br>
                         <%= request.description %>
