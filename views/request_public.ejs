@@ -85,10 +85,10 @@
                 <div class="col-md-6">
                     <h1><%= request.userName %>'s Request</h1>
                     <h3 id="rname" ><%= request.requestName %></h3>
-                    <span class="badge" style="background: gray"><%= request.Token %> token</span>
-                    <span class="badge" style="background: purple"><%= request.completeTime %></span>
-                    <span class="badge" style="background: blue"><%= request.Replies.length %> Reply</span>
-                    <span class="badge" style="background: green"><%= request.Catagory %></span>
+                    <span class="label label-default" style="background: gray; font-size:15px "><%= request.Token %> token</span>
+                    <span class="label label-default" style="background: purple; font-size:15px "><%= request.completeTime %></span>
+                    <span class="label label-default" style="background: blue; font-size:15px "><%= request.Replies.length %> Reply</span>
+                    <span class="label label-default" style="background: green; font-size:15px "><%= request.Catagory %></span>
                     <p>
                         <br>
                         <%= request.description %>
@@ -102,7 +102,7 @@
                         <button id="reply" class="btn btn-block btn-default" style="background: aqua">Login to Reply</button>
                     <% }else {%>
                         <%if (replyStat) { %>
-                            <button id="replied" class="btn btn-block btn-default" style="background: orange">Repled</button>
+                            <button id="replied" class="btn btn-block btn-default" style="background: orange">Replied</button>
                         <% } else {%>
                             <button id="reply" class="btn btn-block btn-default" style="background: aqua">Reply</button>
                         <% }%>
