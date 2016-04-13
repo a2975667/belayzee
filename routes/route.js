@@ -286,10 +286,11 @@ module.exports = {
                             }
                         }
                         for (var n = 0; n < req.user.profile.replies.length; n++) {
-                            if (req.user.profile.replies[n].id == req.params.requestId)
+                            if (req.user.profile.replies[n].id == req.params.requestId){
                                 console.log("hasreplied");
-                            replyStat = true;
+                            replyStat = true;}
                         }
+
                     } else {
                         user = {
                             local: {},
