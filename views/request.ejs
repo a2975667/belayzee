@@ -116,9 +116,9 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <div class="col-md-12">
-              <div class="page-header" display:"margin-bottom: 0px;">
-                <h1>Requests<% if (search == "on"){%>
+            <div class="col-md-12" style="border-radius: 25px; background: #e6e6e6">
+              <div class="page-header" style="margin:0">
+                <h1 >Requests<% if (search == "on"){%>
                   : <%=keyword%> &nbsp&nbsp&nbsp&nbsp&nbsp
                      <button  class="btn btn-info" display="padding: 0em" onclick="location.href = '/requests';"> Clear </button>
 
@@ -128,11 +128,12 @@
               </div>
               <form action="/requests/?keyword=" method="get" role="form">
                 <div class="form-group">
-                  <div class="input-group">
+                  <div class="input-group" >
                     <input id="searchbox" type="text" name="keyword" class="form-control" placeholder="KeyWord">
                     <span class="input-group-btn">
                        <button id="search" class="btn btn-primary" type="submit">Find a Request</button>
                     </span>
+
                   </div>
                 </div>
               </form>
