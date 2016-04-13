@@ -23,6 +23,9 @@ $("#requestForm").submit(function(e){
           }
       });
       console.log(data);
-      window.location = "/requests";
+      setTimeout(function() {
+          window.location = "/requests";
+      }, 1000);
+
 return false;
 });

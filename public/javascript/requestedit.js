@@ -24,7 +24,10 @@ $(document).ready(function() {
               console.log("ok");
             }
         });
-        window.location = "/requests/"+getRequestId();
+        setTimeout(function() {
+            window.location = "/requests/"+getRequestId();
+        }, 1000);
+        
       }
     }
   });
@@ -51,7 +54,10 @@ $(document).ready(function() {
               console.log("ok");
             }
         });
-        window.location = "/requests"
+        setTimeout(function() {
+            window.location = "/requests"
+        }, 1000);
+
       }
     }
   });
@@ -78,16 +84,25 @@ $(document).ready(function() {
               console.log("ok");
             }
         });
-        window.location = "/requests"
+
+        setTimeout(function() {
+            window.location = "/requests"
+        }, 1000);
       }
     }
   });
 
   $("#updateform").click(function() {
     if ($("#status").text()=="Login"){
-      window.location = "/login";
+      setTimeout(function() {
+          window.location = "/login";
+      }, 1000);
+
     }else{
-      window.location = "/update/request/"+ getRequestId();
+      setTimeout(function() {
+          window.location = "/update/request/"+ getRequestId();
+      }, 1000);
+
     }
   });
 

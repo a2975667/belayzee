@@ -36,7 +36,10 @@ $(document).ready(function() {
                     console.log("ok");
                   }
               });
-              window.location = "/profile";
+              setTimeout(function() {
+                  window.location = "/profile";
+              }, 1000);
+
             }
         }
     });

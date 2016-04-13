@@ -16,7 +16,7 @@ var app = express();
 var mongoose = require('mongoose');
 
 
-var url = 'mongodb://localhost:27017/3100test';
+var url = 'mongodb://3100_admin:csci3100@ds023500.mlab.com:23500/belayzee';
 mongoose.connect(url);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
