@@ -619,11 +619,11 @@ module.exports = {
                     user = req.user;
                     status = "Logout";
                 }
-                /*    console.log({
+                    console.log({
                         request: request,
                         user: user,
                         status: status
-                    });*/
+                    });
                 res.render('request.ejs', {
                     request: request,
                     user: user,
