@@ -1,14 +1,20 @@
+/*
+ * reply.js takes cares of the form submission for user proposing a new request
+ * created by tcheng
+ * reply.js handles all actions for a user viewing a specific request by another user
+*/
 $(document).ready(function() {
+    // when the user hit the reply buttom to reply to a specific request
     $("#reply").click(function() {
+        //check if the user is logged in, otherwise redirect to login page
         if ($("#status").text() == "Login") {
             window.location = "/login";
-
         } else {
-            console.log("reply");
+            //proceed a ajax request to serverside for updating user replied to
+            //this specific request
             var data = {};
             data["requestId"] = getRequestId();
             data["name"] = $("#rname").text();
-            //var requestId = getRequestId();
             $.ajax({
                 type: "POST",
                 url: "/reply",
@@ -22,17 +28,20 @@ $(document).ready(function() {
                 }
             });
             setTimeout(function() {
-                location.reload(); //will redirect to your blog page (an ex: blog.html)
+                location.reload();
             }, 1000);
 
         }
     });
 
+    //if the user has already replied to the request, a replied buttom would
+    //appear instead of reply, handled by the ejs file. the following is what
+    //clicking on replied would trigger
     $("#replied").click(function() {
-        console.log("cancel reply");
         var data = {};
         data["requestId"] = getRequestId();
         data["name"] = $("#rname").text();
+        //update server database to cancel the reply
         $.ajax({
             type: "POST",
             url: "/replied",
@@ -53,6 +62,7 @@ $(document).ready(function() {
     return false;
 });
 
+//retrieve request id from the url
 function getRequestId() {
     return window.location.href.split('/')[window.location.href.split('/').length - 1];
 }

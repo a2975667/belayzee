@@ -1,10 +1,13 @@
+/*
+ * Application will start here
+ */
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-//var requests_new = require('./routes/requests_new');
 var flash = require('connect-flash');
 var morgan = require('morgan');
 var session = require('express-session');
@@ -14,11 +17,11 @@ var app = express();
 
 //MongoDB connection setup
 var mongoose = require('mongoose');
-
-
+//mongodb hardcode url
 var url = 'mongodb://3100_admin:csci3100@ds023500.mlab.com:23500/belayzee';
 mongoose.connect(url);
 var db = mongoose.connection;
+//db connection flags
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     // we're connected!
@@ -26,18 +29,14 @@ db.once('open', function () {
 });
 
 
-
 //Passport setup
 var passport = require('passport');
-
 require('./config/passport')(passport); // pass passport for configuration
-
 
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
-// required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -59,11 +58,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//app.use('/', users);
-//app.use('/requests', requests);
-//app.use('/requests', requests_new);
 require('./routes/route.js').authenticate(app, passport); // load our routes and pass in our app and fully configured passport
-//app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

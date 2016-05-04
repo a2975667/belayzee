@@ -144,16 +144,16 @@
                             <br>
                             <% } %>
                                 <% for( var i=0;i<user.profile.replies.length;i++) { %>
-                                    <li class="list-group-item" style="background : #e6e6e6>
+                                    <li class="list-group-item" style="background : #e6e6e6">
                                         <a href='/requests/<%= user.profile.replies[i].id %>'>
-                                            <h3 style="margin: 0; background =#cccccc "> <%= user.profile.replies[i].title %> </h3>
-                                        </a>
+                                            <h3 style="margin: 0; background =#cccccc "> <%= user.profile.replies[i].title %>
+
                                         <% if ( user.profile.replies[i].status == "active"){ %>
                                             <span class="badge" style="background: red">Active<i class="fa fa-star fa-fw"></i></span>
                                             <% } else{%>
                                                 <span class="badge" style="background: orange">Pending<i class="fa fa-bolt fa-fw"></i></span>
                                                 <%  }%>
-                                    </li>
+                    </h3>        </a>        </li>
                                     <% } %>
 
                     </ul>

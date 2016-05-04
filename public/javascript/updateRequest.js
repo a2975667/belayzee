@@ -1,11 +1,14 @@
+/*
+ * updateRequest.js takes cares updateing the request by a user
+ * created by tcheng
+*/
 $("#requestForm").submit(function(e){
   e.preventDefault();
-  console.log("hihi");
   var that = $(this),
       url = that.attr('action'),
       type = that.attr('method'),
       data = {};
-
+      //collect data from each input field by key value pair
       that.find('[id]').each(function(index, value){
         var that = $(this);
             name = that.attr('id');
@@ -14,7 +17,7 @@ $("#requestForm").submit(function(e){
           data[name] = value;
       });
 
-
+      //perform ajax
       $.ajax({
           url: "/update/request/"+ getRequestId(),
           type: type,
@@ -34,6 +37,7 @@ $("#requestForm").submit(function(e){
 return false;
 });
 
+//get the id of the request
 function getRequestId() {
     return window.location.href.split('/')[window.location.href.split('/').length-1] ;
 }

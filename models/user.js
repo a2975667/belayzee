@@ -1,47 +1,54 @@
 /**
  * Created by tcheng on 3/21/16.
+ * part of the schema here is ment to be expanded afterwards
+ *
  */
-// app/models/user.js
-// load the things we need
+
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 var timestamps = require('mongoose-timestamp');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-
+    //local login method
     local            : {
         email        : String,
         password     : String
     },
+    //facebook login, not developed
     facebook         : {
         id           : String,
         token        : String,
         email        : String,
         name         : String
     },
+    //twitter login, not developed
     twitter          : {
         id           : String,
         token        : String,
         displayName  : String,
         username     : String
     },
+    //google login, not developed
     google           : {
         id           : String,
         token        : String,
         email        : String,
         name         : String
     },
+    //profile of the user
     profile          :{
         displayName: String,
         tokens: {
             type: Number,
             default: 1000
         },
+        //dictionary array of all requests proposed
         requests: [{
           id: String,
           title: String
         }],
+        //dictionary array of all replies proposed
         replies:[{
           id: String,
           title: String,
@@ -56,8 +63,7 @@ var userSchema = mongoose.Schema({
 
 userSchema.plugin(timestamps);
 
-// methods ======================
-// generating a hash
+// generating a hash for password
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };

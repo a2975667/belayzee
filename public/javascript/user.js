@@ -1,5 +1,12 @@
+/* user.js
+ * the user profile page control javascript
+ * user can see and manage all actions of the profile page
+ * created by tcheng
+*/
+
 $(document).ready(function() {
     $("#ok").hide();
+    //able to edit name
     $("#edit").click(function() {
         if ($("#status").text() == "Login") {
             window.location = "/login";
@@ -11,14 +18,16 @@ $(document).ready(function() {
             var uid = $("#ok").attr("value");
         }
     });
+    //proceed the update of display name of user
     $("#ok").click(function() {
         if ($("#status").text() == "Login") {
             window.location = "/login";
         } else {
-            console.log("hihi");
+
             var uid = $("#ok").attr("value");
-            console.log(uid);
+
             var uname = $("#DisN").html().trim();
+            //checking of input
             if(uname == ""){
               window.alert("Cannot be blank!");
               setTimeout(function() {
@@ -26,10 +35,10 @@ $(document).ready(function() {
               }, 1000);
               return;
             }
+            //confirmation prompt
             var msg = "change display name to " + uname + " ?";
             if(confirm(msg)){
               var data = {};
-              //data["userId"] = uid;
               data["dname"] = uname;
               $.ajax({
                   type: "POST",

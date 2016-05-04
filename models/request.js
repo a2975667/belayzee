@@ -1,65 +1,50 @@
-// grab the things we need
+/**
+ * Created by sunny
+ * updated and modified by tcheng
+ */
+
+// Schema for request
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var replySchema = new Schema({
-    replyID: {
-        type: String,
-        required: true
-    },
-    userID: {
-        type: String,
-        required: true
-    },
-    userName: {
-        type: String,
-        required: true
-    },
-    rating: {
-        type: Number,
-        min: 1,
-        max: 9999,
-
-    },
-    comment: {
-        type: String,
-
-    }
-}, {
-    timestamps: true
-});
-
 // create a schema
 var requestSchema = new Schema({
+    //name of request
     requestName: {
         type: String,
         required: true
     },
+    //userID of request
     userID: {
         type: String,
         required: true
     },
+    //username of request
     userName: {
         type: String,
         required: true
     },
+    //token required for the request
     Token: {
         type: Number,
         min: 1,
         max: 9999,
         required: true
     },
+    //description of the request
     description: {
         type: String,
         required: true
     },
+    //the contact number for user
     completeTime: {
         type: String,
-        //required: true
     },
+    //category of the request
     Catagory: {
         type: String
     },
+    //dictionary array that stores the replies from other users
     Replies: [{
       userid: String,
       username: String,
@@ -73,9 +58,6 @@ var requestSchema = new Schema({
     timestamps: true
 });
 
-// the schema is useless so far
-// we need to create a model using it
-var Requests = mongoose.model('Request', requestSchema);
-
 // make this available to our Node applications
+var Requests = mongoose.model('Request', requestSchema);
 module.exports = Requests;

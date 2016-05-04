@@ -5,7 +5,7 @@ node server start command: npm start
 
 ###Remember to copy mongod.exe to the place where you want to store the data###
 i.e
-mkdir mongodb 
+mkdir mongodb
 cd mongodb
 mkdir data
 move mongod.exe to the file mongodb
@@ -32,7 +32,4 @@ You can post the request in the following schema
 }
 
 
-e.g. you can download >>>postman<<< software for sending get/post/delete/put 
-
-
-
+e.g. you can download >>>postman<<< software for sending get/post/delete/put
