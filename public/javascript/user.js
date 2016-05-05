@@ -25,8 +25,7 @@ $(document).ready(function() {
         } else {
 
             var uid = $("#ok").attr("value");
-
-            var uname = $("#DisN").html().trim();
+            var uname = $("#DisN").text().trim();
             //checking of input
             if(uname == ""){
               window.alert("Cannot be blank!");
