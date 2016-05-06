@@ -60,6 +60,7 @@ module.exports = function (passport) {
         password : 'password',
         passReqToCallback : true
     },
+
     function(req, email, password, done){
         User.findOne({'local.email' : email},function (err, user) {
             if (err) {

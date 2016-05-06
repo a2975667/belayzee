@@ -286,7 +286,7 @@ module.exports = {
         });
 
         //display the request page
-        app.get('/requests/:requestId', function(req, res, next) {
+        app.get('/requests/:requestId', isLoggedIn , function(req, res, next) {
             Requests.findById(
                 req.params.requestId,
                 function(err, request) {
@@ -305,7 +305,7 @@ module.exports = {
                         for (var n = 0; n < req.user.profile.requests.length; n++) {
                             if (req.user.profile.requests[n].id == req.params.requestId) {
                                 //console.log("found!");
-                                renderfile = 'request_user.ejs' //render the request_user.ejs instead of public version
+                                renderfile = 'request_user.ejs'; //render the request_user.ejs instead of public version
                                 break;
                             }
                         }
@@ -317,6 +317,7 @@ module.exports = {
                         }
 
                     }
+
                     res.render(renderfile, {
                         request: request,
                         user: user,
