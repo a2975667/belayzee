@@ -18,7 +18,7 @@ var app = express();
 //MongoDB connection setup
 var mongoose = require('mongoose');
 //mongodb hardcode url
-var url = 'mongodb://3100_admin:csci3100@ds023500.mlab.com:23500/belayzee';
+var url = 'DATABASE';
 mongoose.connect(url);
 var db = mongoose.connection;
 //db connection flags
@@ -37,7 +37,7 @@ require('./config/passport')(passport); // pass passport for configuration
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ secret: SECRET })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

@@ -1,35 +1,10 @@
-# README #
+# Belayzee
 
-###Please start mongoDB service before starting the node server###
-node server start command: npm start
+People today often have important tasks that requires full attention yet there are many tedious but essential things we have to do. Today many internet services have been putting effort in dealing with this problem yet with a high cost. We want to build a platform that uses some sort of crowdsourcing, or at least someone that can effortlessly help you with your request. BeLayzee is meant to bring people closer and focus to what is the most important of their lives.
 
-###Remember to copy mongod.exe to the place where you want to store the data###
-i.e
-mkdir mongodb
-cd mongodb
-mkdir data
-move mongod.exe to the file mongodb
-mongodb server start command: mongod --dbpath=data
+# Video 
+[![Web Application Video](https://img.youtube.com/vi/R6Cm4GySX7I/0.jpg)](https://www.youtube.com/watch?v=R6Cm4GySX7I)
 
-
-###You can access to homepage using the url:###
-http://localhost:3000/ or http://localhost:3000/index.html
-
-
-###You can get all requests at:###
-http://localhost:3000/requests
-
-
-You can post the request in the following schema
-{
-    "requestID": "111111111111",
-    "userID": "1155049075",
-    "userName": "Lai Sunny",
-    "Token": "999",
-    "description": "This is my first request",
-    "completeTime": "20/4/2016",
-    "Catagory": "Maths"
-}
-
-
-e.g. you can download >>>postman<<< software for sending get/post/delete/put
+# Technology
+This Web application is build using node.js, express.js and MongoDB with EJS as rendering engine.
+It is also designed to be secured.
